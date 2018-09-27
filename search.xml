@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Springboot]]></title>
+    <url>%2F2018%2F09%2F27%2FSpringboot%2F</url>
+    <content type="text"><![CDATA[使用devtools进行热部署1.引入devtools依赖12345678910111213141516&lt;!-- 热部署 --&gt;&lt;!-- devtools可以实现页面热部署（即页面修改后会立即生效，这个可以直接在application.properties文件中配置spring.thymeleaf.cache=false来实现） --&gt;&lt;!-- 实现类文件热部署（类文件修改后不会立即生效），实现对属性文件的热部署。 --&gt;&lt;!-- 即devtools会监听classpath下的文件变动，并且会立即重启应用（发生在保存时机），注意：因为其采用的虚拟机机制，该项重启是很快的 --&gt;&lt;!-- （1）base classloader （Base类加载器）：加载不改变的Class，例如：第三方提供的jar包。 --&gt;&lt;!-- （2）restart classloader（Restart类加载器）：加载正在开发的Class。 --&gt;&lt;!-- 为什么重启很快，因为重启的时候只是加载了在开发的Class，没有重新加载第三方的jar包。 --&gt;&lt;dependency&gt;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;&lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;&lt;!-- optional=true, 依赖不会传递, 该项目依赖devtools; 之后依赖boot项目的项目如果想要使用devtools, 需要重新引入 --&gt;&lt;optional&gt;true&lt;/optional&gt;&lt;/dependency&gt; 2.热部署相关配置12345678#关闭缓存, 即时刷新#spring.freemarker.cache=falsespring.thymeleaf.cache=true#热部署生效spring.devtools.restart.enabled=true#设置重启的目录,添加那个目录的文件需要restartspring.devtools.restart.additional-paths=src/main/java IDEA中热部署无效解决方案 1.Alt+Ctrl+S 在Settting中配置如下:: 2.Shift+Ctrl+Alt+/，选择Registry]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>springboot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SpringBoot整合Mybatis]]></title>
+    <url>%2F2018%2F09%2F27%2FSpringBoot%E6%95%B4%E5%90%88Mybatis%2F</url>
+    <content type="text"><![CDATA[Springboot整合Mybatis1.添加依赖jar包1234567891011121314151617181920212223242526272829303132333435363738394041424344&lt;dependency&gt; &lt;groupId&gt;com.alibaba&lt;/groupId&gt; &lt;artifactId&gt;druid&lt;/artifactId&gt; &lt;version&gt;1.1.0&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt; &lt;groupId&gt;mysql&lt;/groupId&gt; &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt; &lt;version&gt;5.1.41&lt;/version&gt;&lt;/dependency&gt;&lt;!--mybatis--&gt;&lt;dependency&gt; &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt; &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;1.3.1&lt;/version&gt;&lt;/dependency&gt;&lt;!--mapper tk插件 --&gt;&lt;dependency&gt; &lt;groupId&gt;tk.mybatis&lt;/groupId&gt; &lt;artifactId&gt;mapper-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;1.2.4&lt;/version&gt;&lt;/dependency&gt;&lt;!--pagehelper--&gt;&lt;dependency&gt; &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt; &lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;1.2.3&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt; &lt;groupId&gt;com.alibaba&lt;/groupId&gt; &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;1.1.9&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt; &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt; &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt; &lt;version&gt;1.3.2&lt;/version&gt; &lt;scope&gt;compile&lt;/scope&gt; &lt;optional&gt;true&lt;/optional&gt;&lt;/dependency&gt; 2.配置文件:123456789101112131415161718192021222324252627282930313233############################################################## 配置数据源相关 使用阿里巴巴的 druid 数据源#############################################################spring.datasource.url=jdbc:mysql://localhost:3306/springbootspring.datasource.username=rootspring.datasource.password=rootspring.datasource.driver-class-name=com.mysql.jdbc.Driverspring.datasource.druid.initial-size=1spring.datasource.druid.min-idle=1spring.datasource.druid.max-active=20spring.datasource.druid.test-on-borrow=truespring.datasource.druid.stat-view-servlet.allow=true############################################################## mybatis 配置############################################################## mybatis 配置mybatis.type-aliases-package=com.example.demo.entitymybatis.mapper-locations=classpath:mapper/*.xml# 通用 Mapper 配置mapper.mappers=com.example.demo.utils.MyMappermapper.not-empty=falsemapper.identity=MYSQL# 分页插件配置pagehelper.helperDialect=mysqlpagehelper.reasonable=truepagehelper.supportMethodsArguments=truepagehelper.params=count=countSql SpringBoot整合Mybatis逆向工程使用mapper插件 git地址 1.引入jar包:12345&lt;dependency&gt; &lt;groupId&gt;tk.mybatis&lt;/groupId&gt; &lt;artifactId&gt;mapper-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;1.2.4&lt;/version&gt;&lt;/dependency&gt; 2.引入mybatis逆向工程文件 3.运行生成:运行后会生成三个主要文件. MyMapper 插件接口; SysUserMapper 与 SysUserMapper.xml都是表映射 表中映射的mapper会自动继承MaMapper 使用:在service中注入调用即可.]]></content>
+      <categories>
+        <category>web框架</category>
+      </categories>
+      <tags>
+        <tag>springboot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java中Volatile关键字解析]]></title>
+    <url>%2F2018%2F09%2F26%2FJava%E4%B8%ADVolatile%E5%85%B3%E9%94%AE%E5%AD%97%E8%A7%A3%E6%9E%90%2F</url>
+    <content type="text"><![CDATA[一、基本概念先补充一下概念：Java 内存模型中的可见性、原子性和有序性。 可见性： 可见性是一种复杂的属性，因为可见性中的错误总是会违背我们的直觉。通常，我们无法确保执行读操作的线程能适时地看到其他线程写入的值，有时甚至是根本不可能的事情。为了确保多个线程之间对内存写入操作的可见性，必须使用同步机制。 可见性，是指线程之间的可见性，一个线程修改的状态对另一个线程是可见的。也就是一个线程修改的结果。另一个线程马上就能看到。比如：用volatile修饰的变量，就会具有可见性。volatile修饰的变量不允许线程内部缓存和重排序，即直接修改内存。所以对其他线程是可见的。但是这里需要注意一个问题，volatile只能让被他修饰内容具有可见性，但不能保证它具有原子性。比如 volatile int a = 0；之后有一个操作 a++；这个变量a具有可见性，但是a++ 依然是一个非原子操作，也就是这个操作同样存在线程安全问题。 在 Java 中 volatile、synchronized 和 final 实现可见性。 原子性： 原子是世界上的最小单位，具有不可分割性。比如 a=0；（a非long和double类型） 这个操作是不可分割的，那么我们说这个操作时原子操作。再比如：a++； 这个操作实际是a = a + 1；是可分割的，所以他不是一个原子操作。非原子操作都会存在线程安全问题，需要我们使用同步技术（sychronized）来让它变成一个原子操作。一个操作是原子操作，那么我们称它具有原子性。java的concurrent包下提供了一些原子类，我们可以通过阅读API来了解这些原子类的用法。比如：AtomicInteger、AtomicLong、AtomicReference等。 在 Java 中 synchronized 和在 lock、unlock 中操作保证原子性。 有序性： Java 语言提供了 volatile 和 synchronized 两个关键字来保证线程之间操作的有序性，volatile 是因为其本身包含“禁止指令重排序”的语义，synchronized 是由“一个变量在同一个时刻只允许一条线程对其进行 lock 操作”这条规则获得的，此规则决定了持有同一个对象锁的两个同步块只能串行执行。 下面内容摘录自《Java Concurrency in Practice》： 下面一段代码在多线程环境下，将存在问题。 123456789101112131415161718 public class NoVisibility &#123; private static boolean ready; private static int number; private static class ReaderThread extends Thread &#123; @Override public void run() &#123; while(!ready) &#123; Thread.yield(); &#125; System.out.println(number); &#125; &#125; public static void main(String[] args) &#123; new ReaderThread().start(); number = 42; ready = true; &#125;&#125; NoVisibility可能会持续循环下去，因为读线程可能永远都看不到ready的值。甚至NoVisibility可能会输出0，因为读线程可能看到了写入ready的值，但却没有看到之后写入number的值，这种现象被称为“重排序”。只要在某个线程中无法检测到重排序情况（即使在其他线程中可以明显地看到该线程中的重排序），那么就无法确保线程中的操作将按照程序中指定的顺序来执行。当主线程首先写入number，然后在没有同步的情况下写入ready，那么读线程看到的顺序可能与写入的顺序完全相反。 在没有同步的情况下，编译器、处理器以及运行时等都可能对操作的执行顺序进行一些意想不到的调整。在缺乏足够同步的多线程程序中，要想对内存操作的执行春旭进行判断，无法得到正确的结论。 这个看上去像是一个失败的设计，但却能使JVM充分地利用现代多核处理器的强大性能。例如，在缺少同步的情况下，Java内存模型允许编译器对操作顺序进行重排序，并将数值缓存在寄存器中。此外，它还允许CPU对操作顺序进行重排序，并将数值缓存在处理器特定的缓存中。 二、Volatile原理 Java语言提供了一种稍弱的同步机制，即volatile变量，用来确保将变量的更新操作通知到其他线程。当把变量声明为volatile类型后，编译器与运行时都会注意到这个变量是共享的，因此不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或者对其他处理器不可见的地方，因此在读取volatile类型的变量时总会返回最新写入的值。 在访问volatile变量时不会执行加锁操作，因此也就不会使执行线程阻塞，因此volatile变量是一种比sychronized关键字更轻量级的同步机制。 当对非 volatile 变量进行读写的时候，每个线程先从内存拷贝变量到CPU缓存中。如果计算机有多个CPU，每个线程可能在不同的CPU上被处理，这意味着每个线程可以拷贝到不同的 CPU cache 中。 而声明变量是 volatile 的，JVM 保证了每次读变量都从内存中读，跳过 CPU cache 这一步。 当一个变量定义为 volatile 之后，将具备两种特性： 1.保证此变量对所有的线程的可见性，这里的“可见性”，如本文开头所述，当一个线程修改了这个变量的值，volatile 保证了新值能立即同步到主内存，以及每次使用前立即从主内存刷新。但普通变量做不到这点，普通变量的值在线程间传递均需要通过主内存（详见：Java内存模型）来完成。 2.禁止指令重排序优化。有volatile修饰的变量，赋值后多执行了一个“load addl $0x0, (%esp)”操作，这个操作相当于一个内存屏障（指令重排序时不能把后面的指令重排序到内存屏障之前的位置），只有一个CPU访问内存时，并不需要内存屏障；（什么是指令重排序：是指CPU采用了允许将多条指令不按程序规定的顺序分开发送给各相应电路单元处理）。 volatile 性能： volatile 的读性能消耗与普通变量几乎相同，但是写操作稍慢，因为它需要在本地代码中插入许多内存屏障指令来保证处理器不发生乱序执行。]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>volatile</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java基础之多态]]></title>
+    <url>%2F2018%2F09%2F21%2FJava%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%A4%9A%E6%80%81%2F</url>
+    <content type="text"><![CDATA[多态什么是多态 在面向对象的程序设计语言中,多态是继数据抽象和继承之后的第三种基本特征. 多态通过分离做什么和怎么做,从另一角度将接口和实现类分离开来.它允许将多种类型(同一基类导出的)视为同一类型来处理.多态方法调用允许一种类型表现出与其他类型相似之间的区别,只要他们都是从同一基类导出而来的&#8195;&#8195;&#8195;&#8195;—-《java编程思想》 运行时绑定对应类型的方法 在JAVA中除了static方法和final方法(private方法属于final方法)之外,其他所有的方法都是后期绑定.后期绑定的含义就是在运行时根据对象的类型进行绑定方法.而多态就是基于这种机制而产生的. 接口(interface)就是多态的一种体现 面向接口编程在一个面向对象的系统中，系统的各种功能是由许许多多的不同对象协作完成的。在这种情况下，各个对象内部是如何实现自己的对系统设计人员来讲就不那么重要了；而各个对象之间的协作关系则成为系统设计的关键。小到不同类之间的通信，大到各模块之间的交互，在系统设计之初都是要着重考虑的，这也是系统设计的主要工作内容。面向接口编程我想就是指按照这种思想来编程吧！ 总结&#8195; 多态意味着”不同的形式”.在面向对象的程序设计中,我门持有从基类继承而来的相同接口,以及使用该接口的不同形式:不同版本的动态绑定方法.]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+      <tags>
+        <tag>多态</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LinkedList原理及实现]]></title>
+    <url>%2F2018%2F09%2F21%2FLinkedList%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[LinkedList原理及实现 linkedList是一个双向链表结构,每一个节点中连接了前后节点. 初始化LinkedList,其中包含一个head头节点.头节点与自身连接. LinkedList中维护着一个节点(Node)数据结构. 结构图: 简单实现一个LinkedList:123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120package com.xjc.demo1;import java.io.Serializable;import java.util.Iterator;/** * @Author:xjc * @Date:2018/9/21 * @Description:双向循环链表 */public class CricluarDoubleLinkedList&lt;T&gt; implements Serializable,Iterable&lt;T&gt; &#123; /** * @Author:xjc * @Date:2018/9/21 * @Description:实现Iterable接口, 就可以使用for-Each循环 */ @Override public Iterator iterator() &#123; return new Iterator() &#123; private volatile int index=0; @Override public boolean hasNext() &#123; return getNode(index)==null?false:true; &#125; @Override public Object next() &#123; return getValue(index++); &#125; &#125;; &#125; private class Node&lt;T&gt;&#123; private T value; private Node&lt;T&gt; prev; private Node&lt;T&gt; prex; &#125; private Node&lt;T&gt; head; private Integer size; public CricluarDoubleLinkedList()&#123; Node&lt;T&gt; node = new Node&lt;&gt;(); head=node; head.prex=head; head.prev=head; this.size=0; &#125; public void insert(T value)&#123; if(size==0) &#123; Node&lt;T&gt; node = new Node&lt;&gt;(); node.prev=head; node.prex=head; node.value=value; head.prex=node; head.prev=node; size++; &#125;else&#123;// 从尾部添加 Node&lt;T&gt; node=new Node&lt;&gt;(); node.prev=head.prev; node.prex=head; node.value=value; head.prev.prex=node; head.prev=node; size++; &#125; &#125; public Node&lt;T&gt; getNode(Integer index)&#123; if(index&gt;size-1) return null;// 判断index是否大于size/2 决定从哪边开始取 if(index&gt;(size&lt;&lt;1))&#123;// 从尾部取 Node cur=head.prev;// 次数 为 size-index-1 为什么要-1 就是因为size永远比节点数大1, (新增节点后size+1 留一个空位) Integer number=size-index-1; for(int i=0;i&lt;number;i++)&#123; cur=cur.prev; &#125; return cur; &#125;else&#123;// 从头部取 Node cur=head.prex; for(int i=0;i&lt;index;i++)&#123; cur=cur.prex; &#125; return cur; &#125; &#125; public T getValue(Integer index)&#123; if(index&gt;size-1||index&lt;0) throw new IndexOutOfBoundsException(); return getNode(index).value; &#125; public Integer getSize() &#123; return size; &#125;&#125; 分析:为什么LinkedList增删比ArrayList快 (可以看到,LinkedList中增也进行了遍历查询) ArrayList中添加代码如下:123456789101112 // 将e添加到ArrayList的指定位置public void add(int index, E element) &#123; if (index &gt; size || index &lt; 0) throw new IndexOutOfBoundsException( &quot;Index: &quot;+index+&quot;, Size: &quot;+size); ensureCapacity(size+1); // Increments modCount!! System.arraycopy(elementData, index, elementData, index + 1, size - index); elementData[index] = element; size++;&#125; ensureCapacity(size+1) 的作用是“确认ArrayList的容量，若容量不够，则增加容量。” 真正耗时的操作是 System.arraycopy(elementData, index, elementData, index + 1, size - index); System.arraycopy(elementData, index, elementData, index + 1, size - index); 会移动index之后所有元素即可。这就意味着，ArrayList的add(int index, E element)函数，会引起index之后所有元素的改变！]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>LinkedList</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ArrayList集合原理]]></title>
+    <url>%2F2018%2F09%2F20%2FArrayList%E9%9B%86%E5%90%88%E5%8E%9F%E7%90%86%2F</url>
+    <content type="text"><![CDATA[ArrayList实现及其原理 原理 ArrayList实质上就是一个动态数组,其中维护了一个Object[]对象,ArrayList初始化时其大小为10. 其中维护了一个动态指针size表示当前数组使用大小 当调用add方法添加对象时,会比较实际大小与使用大小. 如果越界,则对object数组进行扩容, 调用Arrays.conpyOf()方法进行扩容 大小为原来的1.5倍 实现12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758package com.xjc.demo1;import java.util.Arrays;public class MyArrayList&lt;T&gt; &#123;private Object[] array;private Integer size;public MyArrayList()&#123; array=new T[10]; this.array=new Object[10]; size=0;&#125;public void add(T t)&#123; //判断大小是否满足 if(size+1&lt;array.length)&#123; array[size++]=t; &#125;else&#123; //扩容 grow(size+1); array[size++]=t; &#125;&#125;public T get(Integer index)&#123; checkIndex(index); return (T) array[index];&#125;public void checkIndex(Integer index)&#123; if(index&gt;size-1||index&lt;0) throw new IndexOutOfBoundsException();&#125;public void grow(Integer min)&#123; Integer old=array.length; Integer newCap=(old&gt;&gt;1)+old; if(newCap-min&lt;0) newCap=min; array= Arrays.copyOf(array,newCap);&#125;public Integer getSize()&#123; return this.size;&#125;&#125;]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+      <tags>
+        <tag>ArrayList</tag>
+      </tags>
+  </entry>
+</search>
