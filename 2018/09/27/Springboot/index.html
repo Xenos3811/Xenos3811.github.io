@@ -384,6 +384,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -400,8 +431,8 @@
       
 
       
-        <h1 id="使用devtools进行热部署"><a href="#使用devtools进行热部署" class="headerlink" title="使用devtools进行热部署"></a>使用devtools进行热部署</h1><h2 id="1-引入devtools依赖"><a href="#1-引入devtools依赖" class="headerlink" title="1.引入devtools依赖"></a>1.引入devtools依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 热部署 --&gt;</span><br><span class="line">&lt;!-- devtools可以实现页面热部署（即页面修改后会立即生效，</span><br><span class="line">这个可以直接在application.properties文件中配置spring.thymeleaf.cache=false来实现） --&gt;</span><br><span class="line">&lt;!-- 实现类文件热部署（类文件修改后不会立即生效），实现对属性文件的热部署。 --&gt;</span><br><span class="line">&lt;!-- 即devtools会监听classpath下的文件变动，并且会立即重启应用（发生在保存时机），</span><br><span class="line">注意：因为其采用的虚拟机机制，该项重启是很快的 --&gt;</span><br><span class="line">&lt;!-- （1）base classloader （Base类加载器）：加载不改变的Class，例如：第三方提供的jar包。 --&gt;</span><br><span class="line">&lt;!-- （2）restart classloader（Restart类加载器）：加载正在开发的Class。 --&gt;</span><br><span class="line">&lt;!-- 为什么重启很快，因为重启的时候只是加载了在开发的Class，没有重新加载第三方的jar包。 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</span><br><span class="line">&lt;!-- optional=true, 依赖不会传递, 该项目依赖devtools;</span><br><span class="line">  之后依赖boot项目的项目如果想要使用devtools, 需要重新引入 --&gt;</span><br><span class="line">&lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="2-热部署相关配置"><a href="#2-热部署相关配置" class="headerlink" title="2.热部署相关配置"></a>2.热部署相关配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#关闭缓存, 即时刷新</span><br><span class="line">#spring.freemarker.cache=false</span><br><span class="line">spring.thymeleaf.cache=true</span><br><span class="line"></span><br><span class="line">#热部署生效</span><br><span class="line">spring.devtools.restart.enabled=true</span><br><span class="line">#设置重启的目录,添加那个目录的文件需要restart</span><br><span class="line">spring.devtools.restart.additional-paths=src/main/java</span><br></pre></td></tr></table></figure>
+        <h1 id="使用devtools进行热部署"><a href="#使用devtools进行热部署" class="headerlink" title="使用devtools进行热部署"></a>使用devtools进行热部署</h1><h2 id="1-引入devtools依赖"><a href="#1-引入devtools依赖" class="headerlink" title="1.引入devtools依赖"></a>1.引入devtools依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 热部署 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- devtools可以实现页面热部署（即页面修改后会立即生效，</span></span><br><span class="line"><span class="comment">这个可以直接在application.properties文件中配置spring.thymeleaf.cache=false来实现） --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 实现类文件热部署（类文件修改后不会立即生效），实现对属性文件的热部署。 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 即devtools会监听classpath下的文件变动，并且会立即重启应用（发生在保存时机），</span></span><br><span class="line"><span class="comment">注意：因为其采用的虚拟机机制，该项重启是很快的 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- （1）base classloader （Base类加载器）：加载不改变的Class，例如：第三方提供的jar包。 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- （2）restart classloader（Restart类加载器）：加载正在开发的Class。 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 为什么重启很快，因为重启的时候只是加载了在开发的Class，没有重新加载第三方的jar包。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- optional=true, 依赖不会传递, 该项目依赖devtools;</span></span><br><span class="line"><span class="comment">  之后依赖boot项目的项目如果想要使用devtools, 需要重新引入 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-热部署相关配置"><a href="#2-热部署相关配置" class="headerlink" title="2.热部署相关配置"></a>2.热部署相关配置</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#关闭缓存, 即时刷新</span><br><span class="line"><span class="selector-id">#spring</span><span class="selector-class">.freemarker</span><span class="selector-class">.cache</span>=false</span><br><span class="line">spring<span class="selector-class">.thymeleaf</span><span class="selector-class">.cache</span>=true</span><br><span class="line"></span><br><span class="line">#热部署生效</span><br><span class="line">spring<span class="selector-class">.devtools</span><span class="selector-class">.restart</span><span class="selector-class">.enabled</span>=true</span><br><span class="line">#设置重启的目录,添加那个目录的文件需要restart</span><br><span class="line">spring<span class="selector-class">.devtools</span><span class="selector-class">.restart</span><span class="selector-class">.additional-paths</span>=src/main/java</span><br></pre></td></tr></table></figure>
 <h1 id="IDEA中热部署无效解决方案"><a href="#IDEA中热部署无效解决方案" class="headerlink" title="IDEA中热部署无效解决方案"></a>IDEA中热部署无效解决方案</h1><p> 1.Alt+Ctrl+S 在Settting中配置如下::</p>
 <p><img src="https://user-images.githubusercontent.com/34369858/46139128-4a1fca80-c280-11e8-81c0-b253b9ce64bf.png" alt="image"></p>
 <p>2.Shift+Ctrl+Alt+/，选择Registry<br><img src="https://user-images.githubusercontent.com/34369858/46139199-7b989600-c280-11e8-8d0e-4b54f841e8ac.png" alt="image"></p>
@@ -618,6 +649,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">xjc</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
   
 </div>
 
