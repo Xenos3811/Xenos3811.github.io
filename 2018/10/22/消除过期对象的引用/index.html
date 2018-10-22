@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java优化," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://xujiacong.com/tags/index.html">
+<meta name="description" content="为什么要尽量消除过期对象的引用  在C语言与C++中,创建对象使用完毕后一般会回收对象,但在JAVA中,由于Java回收机制的存在,对象会自动回收.  但在某种条件下java无法回收过期对象而导致内存泄漏. 例:1234567891011121314151617181920212223242526272829303132public class Stack &amp;#123;    private Ob">
+<meta name="keywords" content="java优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="消除过期对象的引用">
+<meta property="og:url" content="http://xujiacong.com/2018/10/22/消除过期对象的引用/index.html">
 <meta property="og:site_name" content="xjc`bolg">
+<meta property="og:description" content="为什么要尽量消除过期对象的引用  在C语言与C++中,创建对象使用完毕后一般会回收对象,但在JAVA中,由于Java回收机制的存在,对象会自动回收.  但在某种条件下java无法回收过期对象而导致内存泄漏. 例:1234567891011121314151617181920212223242526272829303132public class Stack &amp;#123;    private Ob">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-27T11:17:14.800Z">
+<meta property="og:updated_time" content="2018-10-22T11:39:41.715Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="消除过期对象的引用">
+<meta name="twitter:description" content="为什么要尽量消除过期对象的引用  在C语言与C++中,创建对象使用完毕后一般会回收对象,但在JAVA中,由于Java回收机制的存在,对象会自动回收.  但在某种条件下java无法回收过期对象而导致内存泄漏. 例:1234567891011121314151617181920212223242526272829303132public class Stack &amp;#123;    private Ob">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://xujiacong.com/tags/"/>
+  <link rel="canonical" href="http://xujiacong.com/2018/10/22/消除过期对象的引用/"/>
 
 
 
 
 
-  <title>tags | xjc`bolg</title>
+  <title>消除过期对象的引用 | xjc`bolg</title>
   
 
 
@@ -271,40 +275,225 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xujiacong.com/2018/10/22/消除过期对象的引用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xjc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xjc`bolg">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h2 class="post-title" itemprop="name headline">tags</h2>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 8 个标签
+          <h2 class="post-title" itemprop="name headline">消除过期对象的引用</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-22T18:46:00+08:00">
+                2018-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Effective-Java-笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Effective Java 笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/22/消除过期对象的引用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/22/消除过期对象的引用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/10/22/消除过期对象的引用/" class="leancloud_visitors" data-flag-title="消除过期对象的引用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  387
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
             </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/ArrayList/" style="font-size: 12px; color: #ccc">ArrayList</a> <a href="/tags/LinkedList/" style="font-size: 12px; color: #ccc">LinkedList</a> <a href="/tags/MySQL优化/" style="font-size: 12px; color: #ccc">MySQL优化</a> <a href="/tags/MySQL调优/" style="font-size: 12px; color: #ccc">MySQL调优</a> <a href="/tags/java优化/" style="font-size: 12px; color: #ccc">java优化</a> <a href="/tags/springboot/" style="font-size: 30px; color: #111">springboot</a> <a href="/tags/volatile/" style="font-size: 12px; color: #ccc">volatile</a> <a href="/tags/多态/" style="font-size: 12px; color: #ccc">多态</a>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="为什么要尽量消除过期对象的引用"><a href="#为什么要尽量消除过期对象的引用" class="headerlink" title="为什么要尽量消除过期对象的引用"></a>为什么要尽量消除过期对象的引用</h1><p>  在C语言与C++中,创建对象使用完毕后一般会回收对象,但在JAVA中,由于Java回收机制的存在,对象会自动回收.<br>  但在某种条件下java无法回收过期对象而导致内存泄漏.</p>
+<h1 id="例"><a href="#例" class="headerlink" title="例:"></a>例:</h1><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> class Stack &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">Object</span>[] elements;</span><br><span class="line">    <span class="keyword">private</span> Integer <span class="built_in">size</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer DEFULT_CAPACITY=<span class="number">16</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Stack()&#123;</span><br><span class="line">        <span class="keyword">this</span>.elements=<span class="keyword">new</span> <span class="keyword">Object</span>[DEFULT_CAPACITY];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> push(<span class="keyword">Object</span> object)&#123;</span><br><span class="line">        ensureCapacity();</span><br><span class="line">        <span class="keyword">this</span>.elements[<span class="built_in">size</span>++]=object;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">Object</span> pop()&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">size</span>==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span>  IndexOutOfBoundsException();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.elements[--<span class="built_in">size</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @Author:xjc</span></span><br><span class="line"><span class="comment">     * @Date:2018/10/22</span></span><br><span class="line"><span class="comment">     * @Description: 确保容量</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> ensureCapacity()&#123;</span><br><span class="line">        <span class="keyword">if</span>(elements.length==<span class="built_in">size</span>)</span><br><span class="line">            <span class="keyword">this</span>.elements= Arrays.copyOf(elements,<span class="built_in">size</span>&lt;&lt;<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  上面例子是一个队列,并没有明显错误.但其中隐藏了一个’内存泄漏’问题.<br>  比如程序中push了很多对象后,又调用pop方法弹出栈.缺没有后续的push方法替换已经pop出去了的对象的引用.导致java虚拟机无法回收.  </p>
+<blockquote>
+<p><strong>即时只有少量几个对象的引用被无意识的保留下来,也会有许许多多的对象被排除在垃圾回收机制之外,从而潜在对性能造成重大影响</strong>  </p>
+</blockquote>
+<p>修复:一旦对象引用过期,就清空这些引用<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">Object</span> pop()&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">size</span>==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span>  IndexOutOfBoundsException();</span><br><span class="line">        <span class="keyword">Object</span> obj = <span class="keyword">this</span>.elements[--<span class="built_in">size</span>];</span><br><span class="line">        <span class="keyword">this</span>.elements[<span class="built_in">size</span>]=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><font size="4" face="黑体">一般而言,只要类是自己管理内存(像Stack中object数据,其中的废弃与有用由自己决定),就应该警惕内存泄漏</font>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java优化/" rel="tag"># java优化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/21/mysql主备赋值与读写分离/" rel="next" title="mysql主备复制与读写分离">
+                <i class="fa fa-chevron-left"></i> mysql主备复制与读写分离
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -340,8 +529,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -415,6 +613,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要尽量消除过期对象的引用"><span class="nav-number">1.</span> <span class="nav-text">为什么要尽量消除过期对象的引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例"><span class="nav-number">2.</span> <span class="nav-text">例:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
