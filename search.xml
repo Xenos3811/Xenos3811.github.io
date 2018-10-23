@@ -3,12 +3,12 @@
   <entry>
     <title><![CDATA[bookNotes-1]]></title>
     <url>%2F2018%2F10%2F23%2FbookNotes-1%2F</url>
-    <content type="text"><![CDATA[消除过期对象的引用 在C语言与C++中,创建对象使用完毕后一般会回收对象,但在JAVA中,由于Java回收机制的存在,对象会自动回收. 但在某种条件下java无法回收过期对象而导致内存泄漏. 例:1234567891011121314151617181920212223242526272829303132public class Stack &#123; private Object[] elements; private Integer size=0; private static final Integer DEFULT_CAPACITY=16; public Stack()&#123; this.elements=new Object[DEFULT_CAPACITY]; &#125; public void push(Object object)&#123; ensureCapacity(); this.elements[size++]=object; &#125; public Object pop()&#123; if(size==0) throw new IndexOutOfBoundsException(); return this.elements[--size]; &#125; /** * @Author:xjc * @Date:2018/10/22 * @Description: 确保容量 */ private void ensureCapacity()&#123; if(elements.length==size) this.elements= Arrays.copyOf(elements,size&lt;&lt;1); &#125;&#125; 上面例子是一个队列,并没有明显错误.但其中隐藏了一个’内存泄漏’问题. 比如程序中push了很多对象后,又调用pop方法弹出栈.缺没有后续的push方法替换已经pop出去了的对象的引用.导致java虚拟机无法回收. 即时只有少量几个对象的引用被无意识的保留下来,也会有许许多多的对象被排除在垃圾回收机制之外,从而潜在对性能造成重大影响 修复:一旦对象引用过期,就清空这些引用1234567public Object pop()&#123; if(size==0) throw new IndexOutOfBoundsException(); Object obj = this.elements[--size]; this.elements[size]=null; return obj; &#125; 总结一般而言,只要类是自己管理内存(像Stack中object数据,其中的废弃与有用由自己决定),就应该警惕内存泄漏]]></content>
+    <content type="text"><![CDATA[消除过期对象的引用 在C语言与C++中,创建对象使用完毕后一般会回收对象,但在JAVA中,由于Java回收机制的存在,对象会自动回收. 但在某些条件下java无法回收过期对象而导致内存泄漏. 例:1234567891011121314151617181920212223242526272829303132public class Stack &#123; private Object[] elements; private Integer size=0; private static final Integer DEFULT_CAPACITY=16; public Stack()&#123; this.elements=new Object[DEFULT_CAPACITY]; &#125; public void push(Object object)&#123; ensureCapacity(); this.elements[size++]=object; &#125; public Object pop()&#123; if(size==0) throw new IndexOutOfBoundsException(); return this.elements[--size]; &#125; /** * @Author:xjc * @Date:2018/10/22 * @Description: 确保容量 */ private void ensureCapacity()&#123; if(elements.length==size) this.elements= Arrays.copyOf(elements,size&lt;&lt;1); &#125;&#125; 上面例子是一个队列,并没有明显错误.但其中隐藏了一个’内存泄漏’问题. 比如程序中push了很多对象后,又调用pop方法弹出栈.缺没有后续的push方法替换已经pop出去了的对象的引用.导致java虚拟机无法回收. 即时只有少量几个对象的引用被无意识的保留下来,也会有许许多多的对象被排除在垃圾回收机制之外,从而潜在对性能造成重大影响 修复:一旦对象引用过期,就清空这些引用1234567public Object pop()&#123; if(size==0) throw new IndexOutOfBoundsException(); Object obj = this.elements[--size]; this.elements[size]=null; return obj; &#125; 总结一般而言,只要类是自己管理内存(像Stack中object数据,其中的废弃与有用由自己决定),就应该警惕内存泄漏]]></content>
       <categories>
         <category>notes</category>
       </categories>
       <tags>
-        <tag>java优化</tag>
+        <tag>base</tag>
       </tags>
   </entry>
   <entry>
