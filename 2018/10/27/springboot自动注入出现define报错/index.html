@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="MySQL优化," />
+  <meta name="keywords" content="springboot报错," />
 
 
 
@@ -79,28 +79,18 @@
 
 
 
-<meta name="description" content="实现两台mysql服务器主从复制服务器配置 准备两台服务器.  修改主服务器 (master) my.cnf配置文件,设置服务器唯一ip  主服务器开放账号运行下面sql语句  修改从服务器(slave) 配置文件   开启主备机同步 查询master服务器状态.show master status;   在从服务器中链接主服务器  (注意服务器IP以及日志点位与主服务器对应) 查看slave服务">
-<meta name="keywords" content="MySQL优化">
+<meta name="description" content="SpringBoot@Autowired无法注入搭建完spring boot的demo后自然要实现自动注入来体现spring ioc的便利了，但是我在实施过程中出现了这么一个问题，见下面，这里找到解决办法记录下来，供遇到同样的问题的同僚参考 123456789Field baseRedisService in com.itmayiedu.common.base.BaseApiService req">
+<meta name="keywords" content="springboot报错">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql主备复制与读写分离">
-<meta property="og:url" content="http://xujiacong.com/2018/10/21/mysql主备赋值与读写分离/index.html">
+<meta property="og:title" content="springboot自动注入出现define报错">
+<meta property="og:url" content="http://xujiacong.com/2018/10/27/springboot自动注入出现define报错/index.html">
 <meta property="og:site_name" content="xjc`bolg">
-<meta property="og:description" content="实现两台mysql服务器主从复制服务器配置 准备两台服务器.  修改主服务器 (master) my.cnf配置文件,设置服务器唯一ip  主服务器开放账号运行下面sql语句  修改从服务器(slave) 配置文件   开启主备机同步 查询master服务器状态.show master status;   在从服务器中链接主服务器  (注意服务器IP以及日志点位与主服务器对应) 查看slave服务">
+<meta property="og:description" content="SpringBoot@Autowired无法注入搭建完spring boot的demo后自然要实现自动注入来体现spring ioc的便利了，但是我在实施过程中出现了这么一个问题，见下面，这里找到解决办法记录下来，供遇到同样的问题的同僚参考 123456789Field baseRedisService in com.itmayiedu.common.base.BaseApiService req">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/47266584-3740a300-d56b-11e8-85d8-ddcec6084cc7.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/47266632-debdd580-d56b-11e8-876d-9ff2e263d876.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/47266652-247a9e00-d56c-11e8-9864-e26dab9f101e.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/47266687-a8348a80-d56c-11e8-8220-e6534b24f366.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/47266855-a2d83f80-d56e-11e8-96bf-788b23949aa7.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/47266870-e7fc7180-d56e-11e8-924f-d0663ef83c59.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/47266929-740e9900-d56f-11e8-9571-d33ccba556f6.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/47267156-568efe80-d572-11e8-9d1e-fb6f60c18754.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/47267170-7d4d3500-d572-11e8-9488-750d050044a1.png">
-<meta property="og:updated_time" content="2018-10-21T12:46:04.756Z">
+<meta property="og:updated_time" content="2018-10-27T14:06:30.378Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql主备复制与读写分离">
-<meta name="twitter:description" content="实现两台mysql服务器主从复制服务器配置 准备两台服务器.  修改主服务器 (master) my.cnf配置文件,设置服务器唯一ip  主服务器开放账号运行下面sql语句  修改从服务器(slave) 配置文件   开启主备机同步 查询master服务器状态.show master status;   在从服务器中链接主服务器  (注意服务器IP以及日志点位与主服务器对应) 查看slave服务">
-<meta name="twitter:image" content="https://user-images.githubusercontent.com/34369858/47266584-3740a300-d56b-11e8-85d8-ddcec6084cc7.png">
+<meta name="twitter:title" content="springboot自动注入出现define报错">
+<meta name="twitter:description" content="SpringBoot@Autowired无法注入搭建完spring boot的demo后自然要实现自动注入来体现spring ioc的便利了，但是我在实施过程中出现了这么一个问题，见下面，这里找到解决办法记录下来，供遇到同样的问题的同僚参考 123456789Field baseRedisService in com.itmayiedu.common.base.BaseApiService req">
 
 
 
@@ -130,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://xujiacong.com/2018/10/21/mysql主备赋值与读写分离/"/>
+  <link rel="canonical" href="http://xujiacong.com/2018/10/27/springboot自动注入出现define报错/"/>
 
 
 
 
 
-  <title>mysql主备复制与读写分离 | xjc`bolg</title>
+  <title>springboot自动注入出现define报错 | xjc`bolg</title>
   
 
 
@@ -297,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xujiacong.com/2018/10/21/mysql主备赋值与读写分离/">
+    <link itemprop="mainEntityOfPage" href="http://xujiacong.com/2018/10/27/springboot自动注入出现define报错/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xjc">
@@ -314,7 +304,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">mysql主备复制与读写分离</h2>
+          <h2 class="post-title" itemprop="name headline">springboot自动注入出现define报错</h2>
         
 
         <div class="post-meta">
@@ -326,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T19:44:31+08:00">
-                2018-10-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-27T21:52:46+08:00">
+                2018-10-27
               </time>
             
 
@@ -349,8 +339,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/categories/报错/" itemprop="url" rel="index">
+                    <span itemprop="name">报错</span>
                   </a>
                 </span>
 
@@ -367,8 +357,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/21/mysql主备赋值与读写分离/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/mysql主备赋值与读写分离/" itemprop="commentCount"></span>
+                <a href="/2018/10/27/springboot自动注入出现define报错/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/27/springboot自动注入出现define报错/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -376,7 +366,7 @@
 
           
           
-             <span id="/2018/10/21/mysql主备赋值与读写分离/" class="leancloud_visitors" data-flag-title="mysql主备复制与读写分离">
+             <span id="/2018/10/27/springboot自动注入出现define报错/" class="leancloud_visitors" data-flag-title="springboot自动注入出现define报错">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -401,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  617
+                  448
                 </span>
               
 
@@ -417,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  1
                 </span>
               
             </div>
@@ -438,37 +428,14 @@
       
 
       
-        <h1 id="实现两台mysql服务器主从复制"><a href="#实现两台mysql服务器主从复制" class="headerlink" title="实现两台mysql服务器主从复制"></a>实现两台mysql服务器主从复制</h1><h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><ol>
-<li><p>准备两台服务器.<br><img src="https://user-images.githubusercontent.com/34369858/47266584-3740a300-d56b-11e8-85d8-ddcec6084cc7.png" alt="image"></p>
-</li>
-<li><p>修改<strong>主</strong>服务器 (master) <strong>my.cnf</strong>配置文件,设置服务器唯一ip<br><img src="https://user-images.githubusercontent.com/34369858/47266632-debdd580-d56b-11e8-876d-9ff2e263d876.png" alt="image"></p>
-</li>
-<li><p>主服务器开放账号<br>运行下面sql语句<br><img src="https://user-images.githubusercontent.com/34369858/47266652-247a9e00-d56c-11e8-9864-e26dab9f101e.png" alt="image"></p>
-</li>
-<li><p>修改<strong>从</strong>服务器(slave) 配置文件<br><img src="https://user-images.githubusercontent.com/34369858/47266687-a8348a80-d56c-11e8-8220-e6534b24f366.png" alt="image"></p>
-</li>
-</ol>
-<h2 id="开启主备机同步"><a href="#开启主备机同步" class="headerlink" title="开启主备机同步"></a>开启主备机同步</h2><ol>
-<li>查询master服务器状态.<br><strong>show master status;</strong><br><img src="https://user-images.githubusercontent.com/34369858/47266855-a2d83f80-d56e-11e8-96bf-788b23949aa7.png" alt="image">  </li>
-<li>在从服务器中链接主服务器  (注意服务器IP以及日志点位与主服务器对应)<br><img src="https://user-images.githubusercontent.com/34369858/47266870-e7fc7180-d56e-11e8-924f-d0663ef83c59.png" alt="image"></li>
-<li>查看slave服务器状态(都为YES是,表示搭建成功).<br><img src="https://user-images.githubusercontent.com/34369858/47266929-740e9900-d56f-11e8-9571-d33ccba556f6.png" alt="image"></li>
-</ol>
-<h1 id="使用myCat实现数据库读写分离"><a href="#使用myCat实现数据库读写分离" class="headerlink" title="使用myCat实现数据库读写分离"></a>使用myCat实现数据库读写分离</h1><ol>
-<li><p>使用myCat 中间件,在server.xml中添加两个用户,分别用来读与写;</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">user</span> <span class="attr">name</span>=<span class="string">"mycat"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>mycat<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"schemas"</span>&gt;</span>mycat<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 添加user --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">user</span> <span class="attr">name</span>=<span class="string">"mycat_red"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>mycat_red<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"schemas"</span>&gt;</span>mycat<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"readOnly"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改scheme.xml 相关配置;  </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mycat:schema SYSTEM "schema.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mycat:schema</span> <span class="attr">xmlns:mycat</span>=<span class="string">"http://org.opencloudb/"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 与server.xml中user的schemas名一致 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">"mycat"</span> <span class="attr">checkSQLschema</span>=<span class="string">"true"</span> <span class="attr">sqlMaxLimit</span>=<span class="string">"100"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">"t_users"</span> <span class="attr">primaryKey</span>=<span class="string">"user_id"</span> <span class="attr">dataNode</span>=<span class="string">"dn1"</span> <span class="attr">rule</span>=<span class="string">"rule1"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">"t_message"</span> <span class="attr">type</span>=<span class="string">"global"</span> <span class="attr">primaryKey</span>=<span class="string">"messages_id"</span> <span class="attr">dataNode</span>=<span class="string">"dn1"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">"dn1"</span> <span class="attr">dataHost</span>=<span class="string">"jdbchost"</span> <span class="attr">database</span>=<span class="string">"weibo_simple"</span> /&gt;</span> <span class="comment">&lt;!--数据库名称 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dataHost</span> <span class="attr">name</span>=<span class="string">"jdbchost"</span> <span class="attr">maxCon</span>=<span class="string">"1000"</span> <span class="attr">minCon</span>=<span class="string">"10"</span> <span class="attr">balance</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">writeType</span>=<span class="string">"0"</span> <span class="attr">dbType</span>=<span class="string">"mysql"</span> <span class="attr">dbDriver</span>=<span class="string">"native"</span> <span class="attr">switchType</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">slaveThreshold</span>=<span class="string">"100"</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">heartbeat</span>&gt;</span>select user()<span class="tag">&lt;/<span class="name">heartbeat</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">writeHost</span> <span class="attr">host</span>=<span class="string">"hostMaster"</span> <span class="attr">url</span>=<span class="string">"192.168.25.134:3306"</span> <span class="attr">user</span>=<span class="string">"root"</span> <span class="attr">password</span>=<span class="string">"root"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">writeHost</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">writeHost</span> <span class="attr">host</span>=<span class="string">"hostSlave"</span> <span class="attr">url</span>=<span class="string">"192.168.25.135:3306"</span> <span class="attr">user</span>=<span class="string">"root"</span> <span class="attr">password</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dataHost</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mycat:schema</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改rule.xml 相关配置  </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="comment">&lt;!-- - - Licensed under the Apache License, Version 2.0 (the "License");</span></span><br><span class="line"><span class="comment">	- you may not use this file except in compliance with the License. - You</span></span><br><span class="line"><span class="comment">	may obtain a copy of the License at - - http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="comment">	- - Unless required by applicable law or agreed to in writing, software -</span></span><br><span class="line"><span class="comment">	distributed under the License is distributed on an "AS IS" BASIS, - WITHOUT</span></span><br><span class="line"><span class="comment">	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. - See the</span></span><br><span class="line"><span class="comment">	License for the specific language governing permissions and - limitations</span></span><br><span class="line"><span class="comment">	under the License. --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mycat:rule SYSTEM "rule.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mycat:rule</span> <span class="attr">xmlns:mycat</span>=<span class="string">"http://org.opencloudb/"</span>&gt;</span></span><br><span class="line">	 <span class="tag">&lt;<span class="name">tableRule</span> <span class="attr">name</span>=<span class="string">"rule1"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rule</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">columns</span>&gt;</span>user_id<span class="tag">&lt;/<span class="name">columns</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">algorithm</span>&gt;</span>func1<span class="tag">&lt;/<span class="name">algorithm</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rule</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tableRule</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">function</span> <span class="attr">name</span>=<span class="string">"func1"</span> <span class="attr">class</span>=<span class="string">"org.opencloudb.route.function.AutoPartitionByLong"</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mapFile"</span>&gt;</span>autopartition-long.txt<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">function</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mycat:rule</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动myCat服务器,查看日志文件<br><img src="https://user-images.githubusercontent.com/34369858/47267156-568efe80-d572-11e8-9d1e-fb6f60c18754.png" alt="image">  </p>
-</li>
-</ol>
-<ol start="5">
-<li>使用读权限账号与读写权限账号分别连接myCat,实现读写分离操作.<br><img src="https://user-images.githubusercontent.com/34369858/47267170-7d4d3500-d572-11e8-9488-750d050044a1.png" alt="image"></li>
-</ol>
+        <h1 id="SpringBoot-Autowired无法注入"><a href="#SpringBoot-Autowired无法注入" class="headerlink" title="SpringBoot@Autowired无法注入"></a>SpringBoot@Autowired无法注入</h1><p>搭建完spring boot的demo后自然要实现自动注入来体现spring ioc的便利了，但是我在实施过程中出现了这么一个问题，见下面，这里找到解决办法记录下来，供遇到同样的问题的同僚参考</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Field baseRedisService <span class="keyword">in</span> com<span class="selector-class">.itmayiedu</span><span class="selector-class">.common</span><span class="selector-class">.base</span><span class="selector-class">.BaseApiService</span> required <span class="selector-tag">a</span> bean of type <span class="string">'com.itmayiedu.common.base.BaseRedisService'</span> that could not be found.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Action:</span><br><span class="line"></span><br><span class="line">Consider defining <span class="selector-tag">a</span> bean of type <span class="string">'com.itmayiedu.common.base.BaseRedisService'</span> <span class="keyword">in</span> your configuration.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Process finished with exit <span class="selector-tag">code</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.csdn.net/a532672728/article/details/77702772" target="_blank" rel="noopener">百度答案参考</a><br>根据英文的提示是在配置中找不到一个指定自动注入类型的bean，经过多方排查得出结论：</p>
+<ul>
+<li>正常情况下加上@Component注解的类会自动被Spring扫描到生成Bean注册到spring容器中，既然他说没找到，也就是该注解被没有被spring识别，问题的核心关键就在application类的注解SpringBootApplication上</li>
+<li>这个注解其实相当于下面这一堆注解的效果，其中一个注解就是@Component，在默认情况下只能扫描与控制器在同一个包下以及其子包下的@Component注解，以及能将指定注解的类自动注册为Bean的@Service@Controller和@ Repository，至此明白问题所在，之前我将接口与对应实现类放在了与控制器所在包的同一级目录下，这样的注解自然是无法被识别的</li>
+</ul>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>至此，得出两种解决办法：<br>　　1 .将接口与对应的实现类放在与application启动类的同一个目录或者他的子目录下，这样注解可以被扫描到，这是最省事的办法<br>　　2 .在指定的application类上加上这么一行注解，手动指定application类要扫描哪些包下的注解</p>
 
       
     </div>
@@ -486,7 +453,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MySQL优化/" rel="tag"># MySQL优化</a>
+            <a href="/tags/springboot报错/" rel="tag"># springboot报错</a>
           
         </div>
       
@@ -499,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/18/MySQL调优/" rel="next" title="MySQL调优">
-                <i class="fa fa-chevron-left"></i> MySQL调优
+              <a href="/2018/10/27/WebSocket与Netty/" rel="next" title="WebSocket与Netty">
+                <i class="fa fa-chevron-left"></i> WebSocket与Netty
               </a>
             
           </div>
@@ -508,10 +475,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/23/bookNotes-1/" rel="prev" title="bookNotes-1">
-                bookNotes-1 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -660,7 +623,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实现两台mysql服务器主从复制"><span class="nav-number">1.</span> <span class="nav-text">实现两台mysql服务器主从复制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器配置"><span class="nav-number">1.1.</span> <span class="nav-text">服务器配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启主备机同步"><span class="nav-number">1.2.</span> <span class="nav-text">开启主备机同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用myCat实现数据库读写分离"><span class="nav-number">2.</span> <span class="nav-text">使用myCat实现数据库读写分离</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot-Autowired无法注入"><span class="nav-number">1.</span> <span class="nav-text">SpringBoot@Autowired无法注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">1.1.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></div>
             
 
           </div>
