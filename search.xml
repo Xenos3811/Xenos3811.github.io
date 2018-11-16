@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[面试笔记]]></title>
+    <url>%2F2018%2F11%2F16%2F%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[springboot 中配置文件注入实体类.使用两个注解: @Configuriation 将实体类注入到spring容器中,相当于在xml中配置标签 @ConfigruiationProperties(prefix = “***”) 相当于读取application.yml文件中的配置属性 在application.yml文件中定义 实体类属性实例:在yml文件中配置实体类属性 1234***: ***: ***: ***: 部署的工程目录结构. -传统war包项目 123456789--WEB-INF --静态文件 --classes --编译代码 --配置文件 --lib --依赖jar包--META-INF --软件版本号 -springboot 项目 123456--静态文件--配置文件--编译代码--META-INF --MAVEN-pom文件 --软件版本号 springboot2.0新特性]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[springboot自动注入出现define报错]]></title>
     <url>%2F2018%2F10%2F27%2Fspringboot%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%85%A5%E5%87%BA%E7%8E%B0define%E6%8A%A5%E9%94%99%2F</url>
     <content type="text"><![CDATA[SpringBoot@Autowired无法注入搭建完spring boot的demo后自然要实现自动注入来体现spring ioc的便利了，但是我在实施过程中出现了这么一个问题，见下面，这里找到解决办法记录下来，供遇到同样的问题的同僚参考 123456789Field baseRedisService in com.itmayiedu.common.base.BaseApiService required a bean of type 'com.itmayiedu.common.base.BaseRedisService' that could not be found.Action:Consider defining a bean of type 'com.itmayiedu.common.base.BaseRedisService' in your configuration.Process finished with exit code 1 百度答案参考根据英文的提示是在配置中找不到一个指定自动注入类型的bean，经过多方排查得出结论： 正常情况下加上@Component注解的类会自动被Spring扫描到生成Bean注册到spring容器中，既然他说没找到，也就是该注解被没有被spring识别，问题的核心关键就在application类的注解SpringBootApplication上 这个注解其实相当于下面这一堆注解的效果，其中一个注解就是@Component，在默认情况下只能扫描与控制器在同一个包下以及其子包下的@Component注解，以及能将指定注解的类自动注册为Bean的@Service@Controller和@ Repository，至此明白问题所在，之前我将接口与对应实现类放在了与控制器所在包的同一级目录下，这样的注解自然是无法被识别的 解决至此，得出两种解决办法： 1 .将接口与对应的实现类放在与application启动类的同一个目录或者他的子目录下，这样注解可以被扫描到，这是最省事的办法 2 .在指定的application类上加上这么一行注解，手动指定application类要扫描哪些包下的注解]]></content>
