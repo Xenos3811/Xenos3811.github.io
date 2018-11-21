@@ -283,6 +283,348 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xujiacong.com/2018/11/21/webupload-springboot实现文件上传/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xjc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xjc`bolg">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/21/webupload-springboot实现文件上传/" itemprop="url">webupload+springboot实现文件上传</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-21T08:55:27+08:00">
+                2018-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/commons/" itemprop="url" rel="index">
+                    <span itemprop="name">commons</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/21/webupload-springboot实现文件上传/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/21/webupload-springboot实现文件上传/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/11/21/webupload-springboot实现文件上传/" class="leancloud_visitors" data-flag-title="webupload+springboot实现文件上传">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  15
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用webupload实现文件分片上传"><a href="#使用webupload实现文件分片上传" class="headerlink" title="使用webupload实现文件分片上传"></a>使用webupload实现文件分片上传</h1><h2 id="Web-Uploader"><a href="#Web-Uploader" class="headerlink" title="Web Uploader"></a>Web Uploader</h2><p><a href="http://fex.baidu.com/webuploader/" target="_blank" rel="noopener">WebUploader</a>是由Baidu WebFE(FEX)团队开发的一个简单的以HTML5为主，FLASH为辅的现代文件上传组件。在现代的浏览器里面能充分发挥HTML5的优势，同时又不摒弃主流IE浏览器，沿用原来的FLASH运行时，兼容IE6+，iOS 6+, android 4+。两套运行时，同样的调用方式，可供用户任意选用。采用大文件分片并发上传，极大的提高了文件上传效率。  </p>
+<ol>
+<li><p>创建upload项目并引入jar包及webupload组件  </p>
+<ul>
+<li><p>主要pom依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-fileupload<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-fileupload<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--druid--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--MySQL Driver--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.38<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--junit--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--spring data jpa--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.data<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引入webupload组件<br><img src="https://user-images.githubusercontent.com/34369858/48812575-edb3c580-ed6d-11e8-8182-fd1ef64fc631.png" alt="image"></p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol start="2">
+<li><p>创建实体对象<br><img src="https://user-images.githubusercontent.com/34369858/48812605-1d62cd80-ed6e-11e8-8ff7-f513dc365432.png" alt="image"></p>
+<ul>
+<li><p>FileEntity</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.entity;</span><br><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"><span class="keyword">import</span> lombok.Setter;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.*;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: xjc</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2018/11/20 15:12</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span></span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table(name=<span class="meta-string">"file"</span>)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileEntity</span> <span class="title">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> static <span class="keyword">final</span> long serialVersionUID = <span class="number">1</span>L;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@Column(name = <span class="meta-string">"id"</span>)</span></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    文件类型	type</span></span><br><span class="line">    <span class="meta">@Column(name=<span class="meta-string">"type"</span>)</span></span><br><span class="line">    <span class="keyword">private</span> String type;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    文件后缀	fix</span></span><br><span class="line">    <span class="meta">@Column(name=<span class="meta-string">"fix"</span>)</span></span><br><span class="line">    <span class="keyword">private</span> String fix;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    文件名	name</span></span><br><span class="line">    <span class="meta">@Column(name=<span class="meta-string">"name"</span>)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    创建者	creator</span></span><br><span class="line">    <span class="meta">@Column(name=<span class="meta-string">"user_id"</span>)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">Long</span> userId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    文件大小	size</span></span><br><span class="line">    <span class="meta">@Column(name=<span class="meta-string">"size"</span>)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">Long</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    文件地址	path</span></span><br><span class="line">    <span class="meta">@Column(name=<span class="meta-string">"path"</span>)</span></span><br><span class="line">    <span class="keyword">private</span> String path;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    备注信息	remark</span></span><br><span class="line">    <span class="meta">@Column(name=<span class="meta-string">"remark"</span>)</span></span><br><span class="line">    <span class="keyword">private</span> String remark;</span><br><span class="line">    <span class="comment">//    其他	other</span></span><br><span class="line">    <span class="meta">@Column(name=<span class="meta-string">"other"</span>)</span></span><br><span class="line">    <span class="keyword">private</span> String other;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Date created;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>FileBlock</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">package</span> com.example.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"><span class="keyword">import</span> lombok.Setter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.persistence.Entity;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Id;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Table;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: xjc</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2018/11/20 17:29</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span></span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"fileBlock"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileBlock</span> <span class="keyword">implements</span> <span class="title">Serializable</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1</span>L;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line"><span class="comment">//    块下标</span></span><br><span class="line">    <span class="keyword">private</span> String chunk;</span><br><span class="line"><span class="comment">//    块大小</span></span><br><span class="line">    <span class="keyword">private</span> Long chunkSize;</span><br><span class="line"><span class="comment">//    块标识</span></span><br><span class="line">    <span class="keyword">private</span> String md5;</span><br><span class="line"><span class="comment">//    块路径</span></span><br><span class="line">    <span class="keyword">private</span> String path;</span><br><span class="line"><span class="comment">//    块名称</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Date created;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol start="3">
+<li><p>创建页面html代码  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--引入CSS--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"/css/webuploader.css"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--引入JS--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/js/admin.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/js/jquery-1.8.3.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/js/webuploader.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--SWF在初始化的时候指定，在后面将展示--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">        <span class="selector-id">#ctlBtn</span> &#123;</span></span><br><span class="line"><span class="undefined">            top: 0px;</span></span><br><span class="line"><span class="undefined">            left: 0px;</span></span><br><span class="line"><span class="undefined">            width: 94px;</span></span><br><span class="line"><span class="css">            <span class="selector-tag">height</span>: 40<span class="selector-class">.8px</span>;</span></span><br><span class="line"><span class="undefined">            overflow: hidden;</span></span><br><span class="line"><span class="undefined">            bottom: auto;</span></span><br><span class="line"><span class="undefined">            right: auto;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"uploader"</span> <span class="attr">class</span>=<span class="string">"wu-example"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--用来存放文件信息--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"thelist"</span> <span class="attr">class</span>=<span class="string">"uploader-list"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"btns"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"picker"</span>&gt;</span>选择文件<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"ctlBtn"</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span>&gt;</span>开始上传<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> md5;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//监听分块上传过程中的三个时间点</span></span></span><br><span class="line"><span class="undefined">    WebUploader.Uploader.register(&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="string">"before-send-file"</span>: <span class="string">"beforeSendFile"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"before-send"</span>: <span class="string">"beforeSend"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"after-send-file"</span>: <span class="string">"afterSendFile"</span></span></span><br><span class="line"><span class="undefined">    &#125;, &#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//时间点1：所有分块进行上传之前调用此函数</span></span></span><br><span class="line"><span class="actionscript">        beforeSendFile: <span class="function"><span class="keyword">function</span> <span class="params">(file)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> deferred = WebUploader.Deferred();</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//1、计算文件的唯一标记，用于断点续传</span></span></span><br><span class="line"><span class="actionscript">            (<span class="keyword">new</span> WebUploader.Uploader()).md5File(file, <span class="number">0</span>, <span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span>)</span></span><br><span class="line"><span class="actionscript">                .progress(<span class="function"><span class="keyword">function</span> <span class="params">(percentage)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                    $(<span class="string">'#'</span> + file.id).find(<span class="string">"p.state"</span>).text(<span class="string">"正在读取文件信息..."</span>);</span></span><br><span class="line"><span class="undefined">                &#125;)</span></span><br><span class="line"><span class="actionscript">                .then(<span class="function"><span class="keyword">function</span> <span class="params">(val)</span> </span>&#123;</span></span><br><span class="line"><span class="undefined">                    md5 = val;</span></span><br><span class="line"><span class="javascript">                    $(<span class="string">'#'</span> + file.id).find(<span class="string">"p.state"</span>).text(<span class="string">"成功获取文件信息..."</span>);</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//获取文件信息后进入下一步</span></span></span><br><span class="line"><span class="undefined">                    deferred.resolve();</span></span><br><span class="line"><span class="undefined">                &#125;);</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> deferred.promise();</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//时间点2：如果有分块上传，则每个分块上传之前调用此函数</span></span></span><br><span class="line"><span class="actionscript">        beforeSend: <span class="function"><span class="keyword">function</span> <span class="params">(block)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> deferred = WebUploader.Deferred();</span></span><br><span class="line"><span class="javascript">            $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">                type: <span class="string">"get"</span>,</span></span><br><span class="line"><span class="actionscript">                url: BASE_PATH + <span class="string">"/file/check"</span>,</span></span><br><span class="line"><span class="undefined">                data: &#123;</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//文件唯一标记</span></span></span><br><span class="line"><span class="actionscript">                    <span class="string">"md5"</span>: md5,</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//当前分块下标</span></span></span><br><span class="line"><span class="actionscript">                    <span class="string">"chunk"</span>: block.chunk,</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//当前分块大小</span></span></span><br><span class="line"><span class="actionscript">                    <span class="string">"chunkSize"</span>: block.end - block.start</span></span><br><span class="line"><span class="undefined">                &#125;,</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//无缓存</span></span></span><br><span class="line"><span class="actionscript">                cache: <span class="literal">false</span>,</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//无异步（必须加，否则异步上传会上传已经上传过的块）</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">async</span>: <span class="literal">false</span>,</span></span><br><span class="line"><span class="actionscript">                dataType: <span class="string">"json"</span>,</span></span><br><span class="line"><span class="actionscript">                success: <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">                    <span class="keyword">if</span> (data) &#123;</span></span><br><span class="line"><span class="actionscript">                        <span class="comment">//分块存在，跳过</span></span></span><br><span class="line"><span class="undefined">                        deferred.reject();</span></span><br><span class="line"><span class="actionscript">                    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="actionscript">                        <span class="comment">//分块不存在或不完整，重新发送该分块内容</span></span></span><br><span class="line"><span class="undefined">                        deferred.resolve();</span></span><br><span class="line"><span class="undefined">                    &#125;</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">            <span class="keyword">this</span>.owner.options.formData.md5 = md5;</span></span><br><span class="line"><span class="undefined">            deferred.resolve();</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> deferred.promise();</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 时间点3：所有分块上传成功后调用此函数</span></span></span><br><span class="line"><span class="actionscript">        afterSendFile: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//如果分块上传成功，则通知后台合并分块</span></span></span><br><span class="line"><span class="javascript">            $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">                type: <span class="string">"POST"</span>,</span></span><br><span class="line"><span class="actionscript">                url: BASE_PATH + <span class="string">"/file/merge"</span>,</span></span><br><span class="line"><span class="undefined">                data: &#123;</span></span><br><span class="line"><span class="undefined">                    md5: md5,</span></span><br><span class="line"><span class="undefined">                &#125;,</span></span><br><span class="line"><span class="actionscript">                success: <span class="function"><span class="keyword">function</span> <span class="params">(response)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">                    alert(<span class="string">"上传成功"</span>);</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> uploader = WebUploader.create(&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// swf文件路径</span></span></span><br><span class="line"><span class="actionscript">        swf: BASE_PATH + <span class="string">"/js/Uploader.swf"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 文件接收服务端。</span></span></span><br><span class="line"><span class="actionscript">        server: BASE_PATH + <span class="string">"/file/upload"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 选择文件的按钮。可选。</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 内部根据当前运行是创建，可能是input元素，也可能是flash.</span></span></span><br><span class="line"><span class="actionscript">        pick: <span class="string">"#picker"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！</span></span></span><br><span class="line"><span class="actionscript">        resize: <span class="literal">false</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//开启分片上传</span></span></span><br><span class="line"><span class="actionscript">        chunked: <span class="literal">true</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//分片大小</span></span></span><br><span class="line"><span class="actionscript">        chunkSize: <span class="number">10</span>* <span class="number">1024</span> * <span class="number">1024</span>,  <span class="comment">//*10</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//并发数</span></span></span><br><span class="line"><span class="undefined">        threads: 3</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//请求参数表</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">// formData:datalist,</span></span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    $(<span class="string">"#ctlBtn"</span>).on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">        uploader.upload();</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">    <span class="comment">// 当有文件被添加进队列的时候</span></span></span><br><span class="line"><span class="actionscript">    uploader.on(<span class="string">'fileQueued'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(file)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">"#thelist"</span>).append(<span class="string">"&lt;div id=\""</span> + file.id + <span class="string">"\" class=\"item\"&gt;"</span> +</span></span><br><span class="line"><span class="handlebars"><span class="xml">            "<span class="tag">&lt;<span class="name">h4</span> <span class="attr">class</span>=<span class="string">\</span>"<span class="attr">info</span>\"&gt;</span>" + file.name + "<span class="tag">&lt;/<span class="name">h4</span>&gt;</span>" +</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            "<span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">\</span>"<span class="attr">state</span>\"&gt;</span>等待上传...<span class="tag">&lt;/<span class="name">p</span>&gt;</span>" +</span></span></span><br><span class="line"><span class="actionscript">            <span class="string">"&lt;/div&gt;"</span>);</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//暂停上传的文件</span></span></span><br><span class="line"><span class="javascript">        $(<span class="string">"#thelist"</span>).on(<span class="string">'click'</span>, <span class="string">'.stop'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">            uploader.stop(<span class="literal">true</span>);</span></span><br><span class="line"><span class="undefined">        &#125;),</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//删除上传的文件</span></span></span><br><span class="line"><span class="javascript">        $(<span class="string">"#thelist"</span>).on(<span class="string">'click'</span>, <span class="string">'.remove'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> ($(<span class="keyword">this</span>).parents(<span class="string">".item"</span>).attr(<span class="string">'id'</span>) === file.id) &#123;</span></span><br><span class="line"><span class="undefined">                uploader.removeFile(file);</span></span><br><span class="line"><span class="javascript">                $(<span class="keyword">this</span>).parents(<span class="string">".item"</span>).remove();</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;)</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">    <span class="comment">// 文件上传过程中创建进度条实时显示。</span></span></span><br><span class="line"><span class="actionscript">    uploader.on(<span class="string">'uploadProgress'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(file, percentage)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> $li = $(<span class="string">'#'</span> + file.id);</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> $percent = $li.find(<span class="string">'.progress .progress-bar'</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 避免重复创建</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">if</span> (!$percent.length) &#123;</span></span><br><span class="line"><span class="handlebars"><span class="xml">            // $percent = $('<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress progress-striped active"</span>&gt;</span>' +</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            //     '<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress-bar"</span> <span class="attr">role</span>=<span class="string">"progressbar"</span> <span class="attr">style</span>=<span class="string">"width: 0%"</span>&gt;</span>' +</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//     '&lt;/div&gt;' +</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//     '&lt;/div&gt;').appendTo($li).find('.progress-bar');</span></span></span><br><span class="line"><span class="javascript">            $percent = $(<span class="string">'&lt;div class="progress progress-striped active"&gt;'</span> +</span></span><br><span class="line"><span class="handlebars"><span class="xml">                '<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress-bar"</span> <span class="attr">role</span>=<span class="string">"progressbar"</span> <span class="attr">style</span>=<span class="string">"width: 0%"</span>&gt;</span>' +</span></span></span><br><span class="line"><span class="actionscript">                <span class="string">'&lt;/div&gt;'</span> +</span></span><br><span class="line"><span class="actionscript">                <span class="string">'&lt;/div&gt;'</span>).appendTo($li).find(<span class="string">'.progress'</span>);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="actionscript">        $li.find(<span class="string">'p.state'</span>).text(<span class="string">'上传中'</span>);</span></span><br><span class="line"><span class="actionscript">        $percent.css(&#123;<span class="string">'width'</span>: percentage * <span class="number">100</span> + <span class="string">'%'</span>, <span class="string">'height'</span>: <span class="number">10</span>, <span class="string">'background-color'</span>: <span class="string">'blue'</span>&#125;);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">    uploader.on(<span class="string">'uploadSuccess'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(file)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">'#'</span> + file.id).find(<span class="string">'p.state'</span>).text(<span class="string">'已上传'</span>);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">    uploader.on(<span class="string">'uploadError'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(file)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">'#'</span> + file.id).find(<span class="string">'p.state'</span>).text(<span class="string">'上传出错'</span>);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">    uploader.on(<span class="string">'uploadComplete'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(file)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">'#'</span> + file.id).find(<span class="string">'.progress'</span>).fadeOut();</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>页面展示:<br><img src="https://user-images.githubusercontent.com/34369858/48812932-8e56b500-ed6f-11e8-96a9-71cd7ec0a1d7.png" alt="image"><br><strong>选择文件并上传,webupload会将文件分成片段通过多线程向服务器发送请求</strong><br><img src="https://user-images.githubusercontent.com/34369858/48813019-ef7e8880-ed6f-11e8-9b6a-c7642dd0a17b.png" alt="image"><br>主要分为三个请求:<strong>upload</strong>(上传片段),<strong>check</strong>(检验片段是否存在),<strong>merge</strong>(全部上传成功后合并片段)</p>
+</li>
+</ol>
+<hr>
+<ol start="4">
+<li><p>在服务器端完成文件分片上传操作</p>
+<ul>
+<li><p>创建FileEntityController接受页面请求</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.controller;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">import</span> com.example.common.FileUtils;</span><br><span class="line"> <span class="keyword">import</span> com.example.entity.FileBlock;</span><br><span class="line"> <span class="keyword">import</span> com.example.entity.FileEntity;</span><br><span class="line"> <span class="keyword">import</span> com.example.serivce.FileBlockService;</span><br><span class="line"> <span class="keyword">import</span> com.example.serivce.FileEntityService;</span><br><span class="line"> <span class="keyword">import</span> com.example.utils.Response;</span><br><span class="line"> <span class="keyword">import</span> org.n3r.idworker.Sid;</span><br><span class="line"> <span class="keyword">import</span> org.springframework.beans.factory.<span class="keyword">annotation</span>.Autowired;</span><br><span class="line"> <span class="keyword">import</span> org.springframework.beans.factory.<span class="keyword">annotation</span>.Value;</span><br><span class="line"> <span class="keyword">import</span> org.springframework.web.bind.<span class="keyword">annotation</span>.*;</span><br><span class="line"> <span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">import</span> java.util.Date;</span><br><span class="line"> <span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@author</span>: xjc</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@date</span> 2018/11/20 15:49</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@description</span></span></span><br><span class="line"><span class="comment">  **/</span></span><br><span class="line"> <span class="meta">@RestController</span></span><br><span class="line"> <span class="meta">@RequestMapping(<span class="meta-string">"/file/"</span>)</span></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileEntityController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Autowired</span></span><br><span class="line">     <span class="keyword">protected</span> FileEntityService service;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Autowired</span></span><br><span class="line">     <span class="keyword">protected</span> FileBlockService fileBlockService;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Value(<span class="meta-string">"<span class="subst">$&#123;tempPath&#125;</span>"</span>)</span></span><br><span class="line">     <span class="keyword">protected</span> String tempPath;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Value(<span class="meta-string">"<span class="subst">$&#123;basePath&#125;</span>"</span>)</span></span><br><span class="line">     <span class="keyword">protected</span> String basePath;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@GetMapping( <span class="meta-string">"/get/&#123;md5&#125;"</span>)</span></span><br><span class="line">     <span class="keyword">public</span> Response file(<span class="meta">@PathVariable</span> String md5)&#123;</span><br><span class="line"></span><br><span class="line">         Response result = service.findById(md5);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">return</span> result;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@author</span>:xjc</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@date</span>:2018/11/20</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@description</span>:文件分片上传</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@params</span>:文件,整个文件的md5,片号,文件名,分片总数</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">     <span class="meta">@PostMapping(<span class="meta-string">"upload"</span>)</span></span><br><span class="line">     <span class="keyword">public</span> Response upload(<span class="meta">@RequestParam(value = <span class="meta-string">"file"</span>)</span> MultipartFile file,</span><br><span class="line">                            <span class="meta">@RequestParam(value = <span class="meta-string">"md5"</span>)</span> String md5,</span><br><span class="line">                            <span class="meta">@RequestParam(value = <span class="meta-string">"chunk"</span>, defaultValue = <span class="meta-string">"0"</span>, required = false)</span> String chunk,</span><br><span class="line">                            <span class="meta">@RequestParam(value = <span class="meta-string">"name"</span>)</span> String name,</span><br><span class="line">                            <span class="meta">@RequestParam(value = <span class="meta-string">"chunks"</span>, defaultValue = <span class="meta-string">"0"</span>, required = false)</span> String chunks,</span><br><span class="line">                            <span class="meta">@RequestParam(value = <span class="meta-string">"type"</span>)</span> String type</span><br><span class="line">                            )&#123;</span><br><span class="line">         String uploadPath = tempPath + <span class="string">"\\###"</span> + chunk + <span class="string">"###"</span> + name;</span><br><span class="line"> <span class="comment">//        判断大文件是否存在</span></span><br><span class="line">         <span class="keyword">if</span>(service.findById(md5).getStatus()!=<span class="number">200</span>)&#123;</span><br><span class="line"> <span class="comment">//            由于webUpload多线程上传,所以要加锁</span></span><br><span class="line">             synchronized (FileEntityService.<span class="keyword">class</span>) &#123;</span><br><span class="line">                 <span class="keyword">if</span> (service.findById(md5).getStatus() != <span class="number">200</span>) &#123;</span><br><span class="line">                     <span class="comment">//          保存FileEntity到数据库中</span></span><br><span class="line">                     FileEntity fileEntity = new FileEntity();</span><br><span class="line">                     fileEntity.setId(md5);</span><br><span class="line">                     fileEntity.setCreated(new Date());</span><br><span class="line">                     fileEntity.setType(type);</span><br><span class="line">                     fileEntity.setFix(name.substring(name.lastIndexOf(<span class="string">"."</span>) + <span class="number">1</span>));</span><br><span class="line">                     fileEntity.setName(name);</span><br><span class="line">                     fileEntity.setSize(file.getSize());</span><br><span class="line">                     <span class="comment">//            fileEntity.setPath();</span></span><br><span class="line"></span><br><span class="line">                     <span class="comment">//            fileEntity.setUserId();</span></span><br><span class="line">                     <span class="comment">//          保存文件到数据库中</span></span><br><span class="line">                     service.save(fileEntity);</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * webUpload请求判断重复</span></span><br><span class="line"><span class="comment">         * */</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//        判断文件片段是否存在</span></span><br><span class="line"> <span class="comment">//        FileBlock fileBlock = fileBlockService.findByMd5AndChunk(md5, chunk);</span></span><br><span class="line"> <span class="comment">//        if(fileBlock!=null)&#123;</span></span><br><span class="line"> <span class="comment">////            判断文件大小是否一样</span></span><br><span class="line"> <span class="comment">//</span></span><br><span class="line"> <span class="comment">//</span></span><br><span class="line"> <span class="comment">////            由于数据库记录存上了,.所以不需要判断是否完成上传,直接返回上传成功</span></span><br><span class="line"> <span class="comment">//</span></span><br><span class="line"> <span class="comment">//</span></span><br><span class="line"> <span class="comment">//        &#125;</span></span><br><span class="line"> <span class="comment">//        if(fileBlock!=null)</span></span><br><span class="line"> <span class="comment">//            return Response.ok();</span></span><br><span class="line"></span><br><span class="line">         <span class="comment">//            开始上传文件片段</span></span><br><span class="line">         service.upload(file, chunk, name, uploadPath);</span><br><span class="line"></span><br><span class="line">         <span class="comment">//            上传成功保存到数据库中</span></span><br><span class="line"></span><br><span class="line">         FileBlock fileBlock = new FileBlock();</span><br><span class="line"></span><br><span class="line">         fileBlock.setId(Sid.next());</span><br><span class="line">         fileBlock.setMd5(md5);</span><br><span class="line">         fileBlock.setChunk(chunk);</span><br><span class="line">         fileBlock.setChunkSize(file.getSize());</span><br><span class="line">         fileBlock.setPath(uploadPath);</span><br><span class="line">         fileBlock.setName(<span class="string">"###"</span> + chunk + <span class="string">"###"</span> + name);</span><br><span class="line">         fileBlock.setCreated(new Date());</span><br><span class="line"></span><br><span class="line">         fileBlockService.save(fileBlock);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">return</span> Response.ok();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@author</span>:xjc</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@date</span>:2018/11/20</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@description</span>:检查片段是否已经上传</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@params</span>:</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">     <span class="meta">@GetMapping(<span class="meta-string">"check"</span>)</span></span><br><span class="line">     <span class="keyword">public</span> boolean check(<span class="meta">@RequestParam(value = <span class="meta-string">"md5"</span>)</span> String md5,</span><br><span class="line">                          <span class="meta">@RequestParam(value = <span class="meta-string">"chunk"</span>)</span> String chunk</span><br><span class="line">                          )&#123;</span><br><span class="line"></span><br><span class="line">         FileBlock fileBlock = fileBlockService.findByMd5AndChunk(md5, chunk);</span><br><span class="line">         <span class="keyword">if</span>(fileBlock==<span class="literal">null</span>)</span><br><span class="line">             synchronized (FileBlock.<span class="keyword">class</span>) &#123;</span><br><span class="line">                 <span class="keyword">if</span>(fileBlockService.findByMd5AndChunk(md5, chunk)==<span class="literal">null</span>)</span><br><span class="line">                     <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">             &#125;</span><br><span class="line">         <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@author</span>:xjc</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@date</span>:2018/11/20</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@description</span>:合并片段</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@params</span>:</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">     <span class="meta">@PostMapping(<span class="meta-string">"merge"</span>)</span></span><br><span class="line">     <span class="keyword">public</span> Response merge(<span class="meta">@RequestParam(value = <span class="meta-string">"md5"</span>)</span> String md5)&#123;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//        查询所有md5片段集合(该集合是无顺序的),转换顺序</span></span><br><span class="line">         List&lt;FileBlock&gt; list = fileBlockService.findByMd5(md5);</span><br><span class="line"></span><br><span class="line">         String[] paths=new String[list.size()];</span><br><span class="line"></span><br><span class="line">         <span class="keyword">for</span>(int i=<span class="number">0</span>;i&lt;list.size();i++)&#123;</span><br><span class="line">             FileBlock fileBlock=list.<span class="keyword">get</span>(i);</span><br><span class="line"></span><br><span class="line">             String path = fileBlock.getPath();</span><br><span class="line">             Integer chunk = Integer.parseInt(fileBlock.getChunk());</span><br><span class="line">             paths[chunk]=path;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//        final String[] path, final String finalSavePath</span></span><br><span class="line">         <span class="keyword">if</span>(list.size()==<span class="number">0</span>)</span><br><span class="line">             <span class="keyword">return</span> Response.error();</span><br><span class="line">         FileBlock fileBlock=list.<span class="keyword">get</span>(<span class="number">0</span>);</span><br><span class="line">         String path = fileBlock.getPath();</span><br><span class="line">         String[] split = path.split(<span class="string">"###"</span>);</span><br><span class="line">         String name=split[<span class="number">2</span>];</span><br><span class="line">         String savePath=basePath+<span class="string">"\\"</span>+name;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">try</span> &#123;</span><br><span class="line">             FileUtils.mergeFile(paths,savePath);</span><br><span class="line">         &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">             e.printStackTrace();</span><br><span class="line">             <span class="keyword">return</span> Response.error();</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">return</span> Response.ok();</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>FileEntityService与FileBlockService   </p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">package</span> com.example.serivce;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">import</span> com.example.common.FileUtils;</span><br><span class="line"> <span class="keyword">import</span> com.example.entity.FileBlock;</span><br><span class="line"> <span class="keyword">import</span> com.example.entity.FileEntity;</span><br><span class="line"> <span class="keyword">import</span> com.example.repository.FileEntityRepository;</span><br><span class="line"> <span class="keyword">import</span> com.example.utils.Response;</span><br><span class="line"> <span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"> <span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"> <span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@author</span>: xjc</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@date</span> 2018/11/20 15:33</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@description</span></span></span><br><span class="line"><span class="comment">  **/</span></span><br><span class="line"> <span class="meta">@Service</span></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileEntityService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Autowired</span></span><br><span class="line">     FileEntityRepository fileEntityRepository;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">public</span> <span class="function">Response <span class="title">findById</span><span class="params">(String md5)</span></span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(md5==<span class="keyword">null</span>||<span class="string">""</span>.equals(md5))</span><br><span class="line">             <span class="function"><span class="keyword">return</span> Response.<span class="title">error</span><span class="params">(<span class="string">"null"</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">         FileEntity fileEntity = <span class="keyword">null</span>;</span><br><span class="line">         <span class="keyword">try</span> &#123;</span><br><span class="line"> <span class="comment">//        没找到会报错</span></span><br><span class="line">             fileEntity = fileEntityRepository.findById(md5).get();</span><br><span class="line">              <span class="function"><span class="keyword">return</span> Response.<span class="title">ok</span><span class="params">(<span class="string">"OK"</span>,fileEntity)</span></span>;</span><br><span class="line">         &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">             System.out.println(FileEntityService.class+<span class="string">"找不到ID:::"</span>+md5);</span><br><span class="line">             <span class="function"><span class="keyword">return</span> Response.<span class="title">error</span><span class="params">(<span class="string">"null"</span>)</span></span>;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">upload</span><span class="params">(MultipartFile file, String chunk, String name,String uploadPath)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">try</span> &#123;</span><br><span class="line"> <span class="comment">//            上传片段</span></span><br><span class="line">             FileUtils.uploaded(file,uploadPath);</span><br><span class="line"> <span class="comment">//            成功存储数据到数据库</span></span><br><span class="line">             FileBlock fileBlock = <span class="keyword">new</span> FileBlock();</span><br><span class="line"></span><br><span class="line">         &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">             e.printStackTrace();</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">save</span><span class="params">(FileEntity fileEntity)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">         fileEntityRepository.save(fileEntity);</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+<p>package com.example.serivce;</p>
+<p>import com.example.entity.FileBlock;<br>import com.example.repository.FileBlockRepository;<br>import org.springframework.beans.factory.annotation.Autowired;<br>import org.springframework.stereotype.Service;<br>import java.util.List;</p>
+<p>/**</p>
+<ul>
+<li>@author: xjc</li>
+<li>@date 2018/11/20 20:40</li>
+<li><p>@description<br>**/<br>@Service<br>public class FileBlockService {</p>
+<p> @Autowired<br> protected FileBlockRepository repository;</p>
+<p> public void save(FileBlock fileBlock){</p>
+<pre><code>repository.save(fileBlock);
+</code></pre><p> }</p>
+<p> public List<fileblock> findByMd5(String md5){</fileblock></p>
+<pre><code>return repository.findByMd5(md5);
+</code></pre><p> }</p>
+<p> public FileBlock findByMd5AndChunk(String md5,String chunk){</p>
+<pre><code>return  repository.findByMd5AndChunk(md5,chunk);
+</code></pre><p> }</p>
+</li>
+</ul>
+<p>}   </p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">* </span>FileUtils(文件读写与合并)</span><br></pre></td></tr></table></figure>
+<p>package com.example.common;</p>
+<p>import org.springframework.web.multipart.MultipartFile;</p>
+<p>import java.io.*;<br>import java.nio.channels.FileChannel;<br>import java.nio.channels.WritableByteChannel;</p>
+<p>/**</p>
+<ul>
+<li>@author: xjc</li>
+<li>@date 2018/11/20 19:01</li>
+<li><p>@description<br>**/<br>public class FileUtils {</p>
+<p> public static void uploaded( MultipartFile file,<br>//                                        final String md5,<br>//                                       final String guid,<br>//                                       final String chunk,</p>
+<pre><code>final String uploadFolderPath
+</code></pre><p>//                                       final String fileName,<br>//                                       final String ext,<br>//                                       final String filePath)<br> )throws Exception {</p>
+<pre><code>File uploadFile = new File(uploadFolderPath);
+if(uploadFile.exists()){
+    uploadFile.delete();
+}
+byte[] data = readInputStream(file.getInputStream());
+
+try (FileOutputStream outStream = new FileOutputStream(uploadFile)) {//写入数据
+    outStream.write(data);
+    outStream.flush();
+
+} catch (Exception e) {
+    e.printStackTrace();
+    throw e;
+}
+</code></pre><p> }</p>
+<p> public static byte[] readInputStream(InputStream inStream) throws Exception {</p>
+<pre><code>ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+//创建一个Buffer字符串
+byte[] buffer = new byte[1024];
+//每次读取的字符串长度，如果为-1，代表全部读取完毕
+int len;
+//使用一个输入流从buffer里把数据读取出来
+while ((len = inStream.read(buffer)) != -1) {
+    //用输出流往buffer里写入数据，中间参数代表从哪个位置开始读，len代表读取的长度
+    outStream.write(buffer, 0, len);
+}
+//关闭输入流
+inStream.close();
+//把outStream里的数据写入内存
+return outStream.toByteArray();
+</code></pre><p> }</p>
+<p> /**</p>
+<ul>
+<li>@author:xjc</li>
+<li>@date:2018/11/20</li>
+<li>@description:合并文件</li>
+<li><p>@params:<br>*/<br>public static void mergeFile(final String[] paths, final String finalSavePath)</p>
+<pre><code>throws Exception {
+</code></pre><p> if(paths.length==1){<br>//            不需要合并</p>
+<pre><code>InputStream is= new FileInputStream(paths[0]);
+saveStreamToFile(is,finalSavePath);
+return ;
+</code></pre><p> }<br>//        SequenceInputStream s ;<br>////        InputStream s1 = new FileInputStream(list.get(0).getPath());<br>////        InputStream s2 = new FileInputStream(list.get(1).getPath());<br>////        s = new SequenceInputStream(s1, s2);<br>////        for (int i=2;i&lt;list.size();i++) {<br>////            InputStream s3 = new FileInputStream(list.get(i).getPath());<br>////            s = new SequenceInputStream(s, s3);<br>////        }<br>////<br>////        //通过输出流向文件写入数据<br>////        saveStreamToFile(s, finalSavePath);</p>
+<p> FileOutputStream output = new FileOutputStream(new File(finalSavePath));<br> WritableByteChannel targetChannel = output.getChannel();</p>
+<p> for(int i =0; i&lt;paths.length; i++){</p>
+<pre><code>FileInputStream input = new FileInputStream(paths[i]);
+FileChannel inputChannel = input.getChannel();
+
+inputChannel.transferTo(0, inputChannel.size(), targetChannel);
+
+inputChannel.close();
+input.close();
+</code></pre><p> }<br> targetChannel.close();<br> output.close();</p>
+<p>}<br>/**</p>
+</li>
+<li>从stream中保存文件<br>*</li>
+<li>@param inputStream inputStream</li>
+<li>@param filePath    保存路径</li>
+<li>@throws Exception 异常 抛异常代表失败了<br>*/<br>public static void saveStreamToFile( final InputStream inputStream,<pre><code>                             final String filePath)
+throws Exception {
+</code></pre> /<em>创建输出流，写入数据，合并分块</em>/<br> OutputStream outputStream = new FileOutputStream(filePath);<br> byte[] buffer = new byte[1024];<br> int len = 0;<br> try {<pre><code>while ((len = inputStream.read(buffer)) != -1) {
+    outputStream.write(buffer, 0, len);
+    outputStream.flush();
+}
+</code></pre> } catch (Exception e) {<pre><code>e.printStackTrace();
+throw e;
+</code></pre> } finally {<pre><code>outputStream.close();
+inputStream.close();
+</code></pre> }<br>}<br>}<br><code>`</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://xujiacong.com/2018/11/16/面试笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2246,211 +2588,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xujiacong.com/2018/09/21/Java基础之多态/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xjc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xjc`bolg">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/21/Java基础之多态/" itemprop="url">Java基础之多态</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T10:40:34+08:00">
-                2018-09-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/21/Java基础之多态/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/21/Java基础之多态/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/09/21/Java基础之多态/" class="leancloud_visitors" data-flag-title="Java基础之多态">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  474
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><h2 id="什么是多态"><a href="#什么是多态" class="headerlink" title="什么是多态"></a>什么是多态</h2><ul>
-<li>在面向对象的程序设计语言中,多态是继数据抽象和继承之后的第三种基本特征.<blockquote>
-<p>多态通过分离做什么和怎么做,从另一角度将接口和实现类分离开来.它允许将多种类型(同一基类导出的)视为同一类型来处理.<br>多态方法调用允许一种类型表现出与其他类型相似之间的区别,只要他们都是从同一基类导出而来的<br><br>&#8195;&#8195;&#8195;&#8195;—-<em>《java编程思想》</em></p>
-</blockquote>
-</li>
-<li>运行时绑定对应类型的方法<blockquote>
-<p>在JAVA中除了static方法和final方法(private方法属于final方法)之外,其他所有的方法都是后期绑定.<br>后期绑定的含义就是在<strong>运行时</strong>根据对象的类型进行绑定方法.而<strong>多态</strong>就是基于这种机制而产生的.</p>
-</blockquote>
-接口(interface)就是多态的一种体现<br></li>
-</ul>
-<h2 id="面向接口编程"><a href="#面向接口编程" class="headerlink" title="面向接口编程"></a>面向接口编程</h2><p>在一个面向对象的系统中，系统的各种功能是由许许多多的不同对象协作完成的。在这种情况下，各个对象内部是如何实现自己的对系统设计人员来讲就不那么重要了；而各个对象之间的协作关系则成为系统设计的关键。小到不同类之间的通信，大到各模块之间的交互，在系统设计之初都是要着重考虑的，这也是系统设计的主要工作内容。面向接口编程我想就是指按照这种思想来编程吧！</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&#8195; 多态意味着”不同的形式”.在面向对象的程序设计中,我门持有从基类继承而来的相同接口,以及使用该接口的不同形式:不同版本的动态绑定方法.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2505,7 +2642,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2516,7 +2653,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2527,7 +2664,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2588,7 +2725,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8.4k</span>
+    <span title="Site words total count">11.4k</span>
   
 </div>
 
