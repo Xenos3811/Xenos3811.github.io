@@ -283,6 +283,230 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xujiacong.com/2018/10/21/mysql主备赋值与读写分离/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xjc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xjc`bolg">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/21/mysql主备赋值与读写分离/" itemprop="url">mysql主备复制与读写分离</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T19:44:31+08:00">
+                2018-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/21/mysql主备赋值与读写分离/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/mysql主备赋值与读写分离/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/10/21/mysql主备赋值与读写分离/" class="leancloud_visitors" data-flag-title="mysql主备复制与读写分离">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  617
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="实现两台mysql服务器主从复制"><a href="#实现两台mysql服务器主从复制" class="headerlink" title="实现两台mysql服务器主从复制"></a>实现两台mysql服务器主从复制</h1><h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><ol>
+<li><p>准备两台服务器.<br><img src="https://user-images.githubusercontent.com/34369858/47266584-3740a300-d56b-11e8-85d8-ddcec6084cc7.png" alt="image"></p>
+</li>
+<li><p>修改<strong>主</strong>服务器 (master) <strong>my.cnf</strong>配置文件,设置服务器唯一ip<br><img src="https://user-images.githubusercontent.com/34369858/47266632-debdd580-d56b-11e8-876d-9ff2e263d876.png" alt="image"></p>
+</li>
+<li><p>主服务器开放账号<br>运行下面sql语句<br><img src="https://user-images.githubusercontent.com/34369858/47266652-247a9e00-d56c-11e8-9864-e26dab9f101e.png" alt="image"></p>
+</li>
+<li><p>修改<strong>从</strong>服务器(slave) 配置文件<br><img src="https://user-images.githubusercontent.com/34369858/47266687-a8348a80-d56c-11e8-8220-e6534b24f366.png" alt="image"></p>
+</li>
+</ol>
+<h2 id="开启主备机同步"><a href="#开启主备机同步" class="headerlink" title="开启主备机同步"></a>开启主备机同步</h2><ol>
+<li>查询master服务器状态.<br><strong>show master status;</strong><br><img src="https://user-images.githubusercontent.com/34369858/47266855-a2d83f80-d56e-11e8-96bf-788b23949aa7.png" alt="image">  </li>
+<li>在从服务器中链接主服务器  (注意服务器IP以及日志点位与主服务器对应)<br><img src="https://user-images.githubusercontent.com/34369858/47266870-e7fc7180-d56e-11e8-924f-d0663ef83c59.png" alt="image"></li>
+<li>查看slave服务器状态(都为YES是,表示搭建成功).<br><img src="https://user-images.githubusercontent.com/34369858/47266929-740e9900-d56f-11e8-9571-d33ccba556f6.png" alt="image"></li>
+</ol>
+<h1 id="使用myCat实现数据库读写分离"><a href="#使用myCat实现数据库读写分离" class="headerlink" title="使用myCat实现数据库读写分离"></a>使用myCat实现数据库读写分离</h1><ol>
+<li><p>使用myCat 中间件,在server.xml中添加两个用户,分别用来读与写;</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">user</span> <span class="attr">name</span>=<span class="string">"mycat"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>mycat<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"schemas"</span>&gt;</span>mycat<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 添加user --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">user</span> <span class="attr">name</span>=<span class="string">"mycat_red"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>mycat_red<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"schemas"</span>&gt;</span>mycat<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"readOnly"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改scheme.xml 相关配置;  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mycat:schema SYSTEM "schema.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mycat:schema</span> <span class="attr">xmlns:mycat</span>=<span class="string">"http://org.opencloudb/"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 与server.xml中user的schemas名一致 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">"mycat"</span> <span class="attr">checkSQLschema</span>=<span class="string">"true"</span> <span class="attr">sqlMaxLimit</span>=<span class="string">"100"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">"t_users"</span> <span class="attr">primaryKey</span>=<span class="string">"user_id"</span> <span class="attr">dataNode</span>=<span class="string">"dn1"</span> <span class="attr">rule</span>=<span class="string">"rule1"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">"t_message"</span> <span class="attr">type</span>=<span class="string">"global"</span> <span class="attr">primaryKey</span>=<span class="string">"messages_id"</span> <span class="attr">dataNode</span>=<span class="string">"dn1"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">"dn1"</span> <span class="attr">dataHost</span>=<span class="string">"jdbchost"</span> <span class="attr">database</span>=<span class="string">"weibo_simple"</span> /&gt;</span> <span class="comment">&lt;!--数据库名称 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dataHost</span> <span class="attr">name</span>=<span class="string">"jdbchost"</span> <span class="attr">maxCon</span>=<span class="string">"1000"</span> <span class="attr">minCon</span>=<span class="string">"10"</span> <span class="attr">balance</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">writeType</span>=<span class="string">"0"</span> <span class="attr">dbType</span>=<span class="string">"mysql"</span> <span class="attr">dbDriver</span>=<span class="string">"native"</span> <span class="attr">switchType</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">slaveThreshold</span>=<span class="string">"100"</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">heartbeat</span>&gt;</span>select user()<span class="tag">&lt;/<span class="name">heartbeat</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">writeHost</span> <span class="attr">host</span>=<span class="string">"hostMaster"</span> <span class="attr">url</span>=<span class="string">"192.168.25.134:3306"</span> <span class="attr">user</span>=<span class="string">"root"</span> <span class="attr">password</span>=<span class="string">"root"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">writeHost</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">writeHost</span> <span class="attr">host</span>=<span class="string">"hostSlave"</span> <span class="attr">url</span>=<span class="string">"192.168.25.135:3306"</span> <span class="attr">user</span>=<span class="string">"root"</span> <span class="attr">password</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dataHost</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mycat:schema</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改rule.xml 相关配置  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="comment">&lt;!-- - - Licensed under the Apache License, Version 2.0 (the "License");</span></span><br><span class="line"><span class="comment">	- you may not use this file except in compliance with the License. - You</span></span><br><span class="line"><span class="comment">	may obtain a copy of the License at - - http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="comment">	- - Unless required by applicable law or agreed to in writing, software -</span></span><br><span class="line"><span class="comment">	distributed under the License is distributed on an "AS IS" BASIS, - WITHOUT</span></span><br><span class="line"><span class="comment">	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. - See the</span></span><br><span class="line"><span class="comment">	License for the specific language governing permissions and - limitations</span></span><br><span class="line"><span class="comment">	under the License. --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mycat:rule SYSTEM "rule.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mycat:rule</span> <span class="attr">xmlns:mycat</span>=<span class="string">"http://org.opencloudb/"</span>&gt;</span></span><br><span class="line">	 <span class="tag">&lt;<span class="name">tableRule</span> <span class="attr">name</span>=<span class="string">"rule1"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rule</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">columns</span>&gt;</span>user_id<span class="tag">&lt;/<span class="name">columns</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">algorithm</span>&gt;</span>func1<span class="tag">&lt;/<span class="name">algorithm</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rule</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tableRule</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">function</span> <span class="attr">name</span>=<span class="string">"func1"</span> <span class="attr">class</span>=<span class="string">"org.opencloudb.route.function.AutoPartitionByLong"</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mapFile"</span>&gt;</span>autopartition-long.txt<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">function</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mycat:rule</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动myCat服务器,查看日志文件<br><img src="https://user-images.githubusercontent.com/34369858/47267156-568efe80-d572-11e8-9d1e-fb6f60c18754.png" alt="image">  </p>
+</li>
+</ol>
+<ol start="5">
+<li>使用读权限账号与读写权限账号分别连接myCat,实现读写分离操作.<br><img src="https://user-images.githubusercontent.com/34369858/47267170-7d4d3500-d572-11e8-9488-750d050044a1.png" alt="image"></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://xujiacong.com/2018/10/18/MySQL调优/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -591,8 +815,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
+                  <a href="/categories/spring-boot/" itemprop="url" rel="index">
+                    <span itemprop="name">spring-boot</span>
                   </a>
                 </span>
 
@@ -1820,7 +2044,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1842,7 +2066,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1903,7 +2127,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">15.9k</span>
+    <span title="Site words total count">16.3k</span>
   
 </div>
 
