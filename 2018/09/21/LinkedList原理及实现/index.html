@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="LinkedList," />
 
 
 
@@ -79,14 +79,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://xujiacong.com/categories/index.html">
+<meta name="description" content="LinkedList原理及实现  linkedList是一个双向链表结构,每一个节点中连接了前后节点. 初始化LinkedList,其中包含一个head头节点.头节点与自身连接. LinkedList中维护着一个节点(Node)数据结构.   结构图:  简单实现一个LinkedList:1234567891011121314151617181920212223242526272829303132">
+<meta name="keywords" content="LinkedList">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LinkedList原理及实现">
+<meta property="og:url" content="http://xujiacong.com/2018/09/21/LinkedList原理及实现/index.html">
 <meta property="og:site_name" content="xjc`bolg">
+<meta property="og:description" content="LinkedList原理及实现  linkedList是一个双向链表结构,每一个节点中连接了前后节点. 初始化LinkedList,其中包含一个head头节点.头节点与自身连接. LinkedList中维护着一个节点(Node)数据结构.   结构图:  简单实现一个LinkedList:1234567891011121314151617181920212223242526272829303132">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-27T11:19:16.757Z">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537501437651&di=1da4658ca53003c4a14c904064d44ac6&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D3281801385%2C2142018450%26fm%3D214%26gp%3D0.jpg">
+<meta property="og:updated_time" content="2018-09-27T14:55:15.003Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
+<meta name="twitter:title" content="LinkedList原理及实现">
+<meta name="twitter:description" content="LinkedList原理及实现  linkedList是一个双向链表结构,每一个节点中连接了前后节点. 初始化LinkedList,其中包含一个head头节点.头节点与自身连接. LinkedList中维护着一个节点(Node)数据结构.   结构图:  简单实现一个LinkedList:1234567891011121314151617181920212223242526272829303132">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537501437651&di=1da4658ca53003c4a14c904064d44ac6&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D3281801385%2C2142018450%26fm%3D214%26gp%3D0.jpg">
 
 
 
@@ -116,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://xujiacong.com/categories/"/>
+  <link rel="canonical" href="http://xujiacong.com/2018/09/21/LinkedList原理及实现/"/>
 
 
 
 
 
-  <title>categories | xjc`bolg</title>
+  <title>LinkedList原理及实现 | xjc`bolg</title>
   
 
 
@@ -271,40 +277,242 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xujiacong.com/2018/09/21/LinkedList原理及实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xjc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xjc`bolg">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h2 class="post-title" itemprop="name headline">categories</h2>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                目前共计 16 个分类
+          <h2 class="post-title" itemprop="name headline">LinkedList原理及实现</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T09:05:34+08:00">
+                2018-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/21/LinkedList原理及实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/21/LinkedList原理及实现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/09/21/LinkedList原理及实现/" class="leancloud_visitors" data-flag-title="LinkedList原理及实现">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  631
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
             </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Augular/">Augular</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MQTT/">MQTT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/commons/">commons</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java基础/">java基础</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java高级/">java高级</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/notes/">notes</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring-boot/">spring-boot</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring-security/">spring-security</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web框架/">web框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/并发编程/">并发编程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/报错/">报错</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络编程/">网络编程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="LinkedList原理及实现"><a href="#LinkedList原理及实现" class="headerlink" title="LinkedList原理及实现"></a>LinkedList原理及实现</h1><hr>
+<ul>
+<li>linkedList是一个双向链表结构,每一个节点中连接了前后节点.</li>
+<li>初始化LinkedList,其中包含一个head头节点.头节点与自身连接.</li>
+<li>LinkedList中维护着一个节点(Node)数据结构.</li>
+</ul>
+<hr>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图:"></a>结构图:</h2><p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1537501437651&amp;di=1da4658ca53003c4a14c904064d44ac6&amp;imgtype=jpg&amp;src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D3281801385%2C2142018450%26fm%3D214%26gp%3D0.jpg" alt=""></p>
+<hr>
+<h2 id="简单实现一个LinkedList"><a href="#简单实现一个LinkedList" class="headerlink" title="简单实现一个LinkedList:"></a>简单实现一个LinkedList:</h2><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">package com.xjc.demo1;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @Author:xjc</span><br><span class="line"> * @<span class="keyword">Date</span>:<span class="number">2018</span>/<span class="number">9</span>/<span class="number">21</span></span><br><span class="line"> * @Description:双向循环链表</span><br><span class="line"> */</span><br><span class="line">public class CricluarDoubleLinkedList<span class="tag">&lt;T&gt;</span> implements Serializable,Iterable<span class="tag">&lt;T&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @Author:xjc</span><br><span class="line">     * @<span class="keyword">Date</span>:<span class="number">2018</span>/<span class="number">9</span>/<span class="number">21</span></span><br><span class="line">     * @Description:实现Iterable接口, 就可以使用for-Each循环</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public Iterator iterator() &#123;</span><br><span class="line"></span><br><span class="line">        return new Iterator() &#123;</span><br><span class="line">            private volatile int <span class="attr">index=</span><span class="number">0</span>;</span><br><span class="line">            @Override</span><br><span class="line">            public boolean hasNext() &#123;</span><br><span class="line">                return getNode(index)==null?<span class="literal">false</span>:<span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public Object next() &#123;</span><br><span class="line">                return getValue(index++);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private class <span class="keyword">Node</span><span class="title">&lt;T</span>&gt;&#123;</span><br><span class="line">        private T value;</span><br><span class="line">        private <span class="keyword">Node</span><span class="title">&lt;T</span>&gt; prev;</span><br><span class="line">        private <span class="keyword">Node</span><span class="title">&lt;T</span>&gt; prex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private <span class="keyword">Node</span><span class="title">&lt;T</span>&gt; head;</span><br><span class="line"></span><br><span class="line">    private Integer size;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public CricluarDoubleLinkedList()&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">Node</span><span class="title">&lt;T</span>&gt; <span class="keyword">node</span> <span class="title">= new</span> <span class="keyword">Node</span><span class="title">&lt;&gt;();</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">        head</span>=<span class="keyword">node</span><span class="title">;</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">        head</span>.<span class="attr">prex=</span>head;</span><br><span class="line">        head.<span class="attr">prev=</span>head;</span><br><span class="line"></span><br><span class="line">        this.<span class="attr">size=</span><span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void insert(T value)&#123;</span><br><span class="line">        if(<span class="attr">size=</span>=<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">Node</span><span class="title">&lt;T</span>&gt; <span class="keyword">node</span> <span class="title">= new</span> <span class="keyword">Node</span><span class="title">&lt;&gt;();</span></span><br><span class="line"><span class="title">            node</span>.<span class="attr">prev=</span>head;</span><br><span class="line">            <span class="keyword">node</span>.<span class="title">prex</span>=head;</span><br><span class="line">            <span class="keyword">node</span>.<span class="title">value</span>=value;</span><br><span class="line"></span><br><span class="line">            head.<span class="attr">prex=</span><span class="keyword">node</span><span class="title">;</span></span><br><span class="line"><span class="title">            head</span>.<span class="attr">prev=</span><span class="keyword">node</span><span class="title">;</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">            size</span>++;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">//            从尾部添加</span><br><span class="line">            <span class="keyword">Node</span><span class="title">&lt;T</span>&gt; <span class="keyword">node</span><span class="title">=new</span> <span class="keyword">Node</span><span class="title">&lt;&gt;();</span></span><br><span class="line"><span class="title">            node</span>.<span class="attr">prev=</span>head.prev;</span><br><span class="line">            <span class="keyword">node</span>.<span class="title">prex</span>=head;</span><br><span class="line">            <span class="keyword">node</span>.<span class="title">value</span>=value;</span><br><span class="line"></span><br><span class="line">            head.prev.<span class="attr">prex=</span><span class="keyword">node</span><span class="title">;</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">            head</span>.<span class="attr">prev=</span><span class="keyword">node</span><span class="title">;</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">            size</span>++;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">Node</span><span class="title">&lt;T</span>&gt; getNode(Integer index)&#123;</span><br><span class="line">        if(index&gt;size-<span class="number">1</span>) return null;</span><br><span class="line">//        判断index是否大于size/<span class="number">2</span> 决定从哪边开始取</span><br><span class="line">        if(index&gt;(size<span class="tag">&lt;&lt;1))&#123;</span></span><br><span class="line"><span class="tag">//            从尾部取</span></span><br><span class="line"><span class="tag">            Node cur=head.prev;</span></span><br><span class="line"><span class="tag">//            次数  为  size-index-1    为什么要-1  就是因为size永远比节点数大1,   (新增节点后size+1 留一个空位)</span></span><br><span class="line"><span class="tag">            Integer number=size-index-1;</span></span><br><span class="line"><span class="tag">            for(int i=0;i&lt;number;i++)&#123;</span></span><br><span class="line"><span class="tag">                cur=cur.prev;</span></span><br><span class="line"><span class="tag">            &#125;</span></span><br><span class="line"><span class="tag">            return cur;</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">        &#125;else&#123;</span></span><br><span class="line"><span class="tag">//            从头部取</span></span><br><span class="line"><span class="tag">            Node cur=head.prex;</span></span><br><span class="line"><span class="tag">            for(int i=0;i&lt;index;i++)&#123;</span></span><br><span class="line"><span class="tag">                cur=cur.prex;</span></span><br><span class="line"><span class="tag">            &#125;</span></span><br><span class="line"><span class="tag">            return cur;</span></span><br><span class="line"><span class="tag">        &#125;</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">    &#125;</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">    public T getValue(Integer index)&#123;</span></span><br><span class="line"><span class="tag">        if(index&gt;</span>size-<span class="number">1</span>||index<span class="tag">&lt;0)</span></span><br><span class="line"><span class="tag">            throw new IndexOutOfBoundsException();</span></span><br><span class="line"><span class="tag">        return getNode(index).value;</span></span><br><span class="line"><span class="tag">    &#125;</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">    public Integer getSize() &#123;</span></span><br><span class="line"><span class="tag">        return size;</span></span><br><span class="line"><span class="tag">    &#125;</span></span><br><span class="line"><span class="tag">&#125;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="分析-为什么LinkedList增删比ArrayList快"><a href="#分析-为什么LinkedList增删比ArrayList快" class="headerlink" title="分析:为什么LinkedList增删比ArrayList快"></a>分析:为什么LinkedList增删比ArrayList快</h2><blockquote>
+<p>(可以看到,LinkedList中增也进行了遍历查询)</p>
+</blockquote>
+<h3 id="ArrayList中添加代码如下"><a href="#ArrayList中添加代码如下" class="headerlink" title="ArrayList中添加代码如下:"></a>ArrayList中添加代码如下:</h3><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 将e添加到ArrayList的指定位置</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> add(<span class="keyword">int</span> <span class="keyword">index</span>, E element) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">index</span> &gt; size || <span class="keyword">index</span> &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(</span><br><span class="line">        <span class="string">"Index: "</span>+<span class="keyword">index</span>+<span class="string">", Size: "</span>+size);</span><br><span class="line"></span><br><span class="line">    ensureCapacity(size+<span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">    System.arraycopy(elementData, <span class="keyword">index</span>, elementData, <span class="keyword">index</span> + <span class="number">1</span>,</span><br><span class="line">         size - <span class="keyword">index</span>);</span><br><span class="line">    elementData[<span class="keyword">index</span>] = element;</span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ensureCapacity(size+1) 的作用是<strong>“确认ArrayList的容量，若容量不够，则增加容量。”</strong> <br><br>真正耗时的操作是 <strong>System.arraycopy(elementData, index, elementData, index + 1, size - index);</strong></p>
+</blockquote>
+<blockquote>
+<p>System.arraycopy(elementData, index, elementData, index + 1, size - index); 会移动index之后所有元素即可。这就意味着，ArrayList的add(int index, E element)函数，<strong>会引起index之后所有元素的改变</strong>！</p>
+</blockquote>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LinkedList/" rel="tag"># LinkedList</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/20/ArrayList集合原理/" rel="next" title="ArrayList集合原理">
+                <i class="fa fa-chevron-left"></i> ArrayList集合原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/21/Java基础之多态/" rel="prev" title="Java基础之多态">
+                Java基础之多态 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -340,8 +548,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -415,6 +632,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LinkedList原理及实现"><span class="nav-number">1.</span> <span class="nav-text">LinkedList原理及实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#结构图"><span class="nav-number">1.1.</span> <span class="nav-text">结构图:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单实现一个LinkedList"><span class="nav-number">1.2.</span> <span class="nav-text">简单实现一个LinkedList:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析-为什么LinkedList增删比ArrayList快"><span class="nav-number">1.3.</span> <span class="nav-text">分析:为什么LinkedList增删比ArrayList快</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList中添加代码如下"><span class="nav-number">1.3.1.</span> <span class="nav-text">ArrayList中添加代码如下:</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

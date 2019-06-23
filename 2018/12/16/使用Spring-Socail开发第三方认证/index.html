@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="socail," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="整体流程图: 主要依赖123456789101112131415161718192021&amp;lt;dependency&amp;gt;            &amp;lt;groupId&amp;gt;org.springframework.social&amp;lt;/groupId&amp;gt;            &amp;lt;artifactId&amp;gt;spring-social-core&amp;lt;/artifactId&amp;gt;">
+<meta name="keywords" content="socail">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Spring-Socail开发第三方认证">
+<meta property="og:url" content="http://xujiacong.com/2018/12/16/使用Spring-Socail开发第三方认证/index.html">
+<meta property="og:site_name" content="xjc`bolg">
+<meta property="og:description" content="整体流程图: 主要依赖123456789101112131415161718192021&amp;lt;dependency&amp;gt;            &amp;lt;groupId&amp;gt;org.springframework.social&amp;lt;/groupId&amp;gt;            &amp;lt;artifactId&amp;gt;spring-social-core&amp;lt;/artifactId&amp;gt;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/50052379-160cc500-015e-11e9-8c50-4afe0cc1be5b.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/50052504-fe364080-015f-11e9-81cf-e5e54d2a8bbf.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/50052513-363d8380-0160-11e9-8a5a-e5ce422a5ff7.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/34369858/50052533-8e748580-0160-11e9-8638-b6d89864acd9.png">
+<meta property="og:updated_time" content="2018-12-16T10:40:43.400Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Spring-Socail开发第三方认证">
+<meta name="twitter:description" content="整体流程图: 主要依赖123456789101112131415161718192021&amp;lt;dependency&amp;gt;            &amp;lt;groupId&amp;gt;org.springframework.social&amp;lt;/groupId&amp;gt;            &amp;lt;artifactId&amp;gt;spring-social-core&amp;lt;/artifactId&amp;gt;">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/34369858/50052379-160cc500-015e-11e9-8c50-4afe0cc1be5b.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xujiacong.com/2018/12/16/使用Spring-Socail开发第三方认证/"/>
+
+
+
+
+
+  <title>使用Spring-Socail开发第三方认证 | xjc`bolg</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xjc`bolg</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xujiacong.com/2018/12/16/使用Spring-Socail开发第三方认证/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xjc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xjc`bolg">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">使用Spring-Socail开发第三方认证</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-16T18:07:56+08:00">
+                2018-12-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring-security/" itemprop="url" rel="index">
+                    <span itemprop="name">spring-security</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/16/使用Spring-Socail开发第三方认证/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/16/使用Spring-Socail开发第三方认证/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/12/16/使用Spring-Socail开发第三方认证/" class="leancloud_visitors" data-flag-title="使用Spring-Socail开发第三方认证">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>整体流程图:<br><img src="https://user-images.githubusercontent.com/34369858/50052379-160cc500-015e-11e9-8c50-4afe0cc1be5b.png" alt="image"></p>
+<h1 id="主要依赖"><a href="#主要依赖" class="headerlink" title="主要依赖"></a>主要依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.social<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-social-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.0.M4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.social<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-social-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.0.M4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.social<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-social-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.0.M4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.social<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-social-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.0.M4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="构建ServiceProvider-服务器提供商"><a href="#构建ServiceProvider-服务器提供商" class="headerlink" title="构建ServiceProvider(服务器提供商)"></a>构建ServiceProvider(服务器提供商)</h1><h2 id="1-构建OAuth2Operations对象-获取token对象"><a href="#1-构建OAuth2Operations对象-获取token对象" class="headerlink" title="1.构建OAuth2Operations对象(获取token对象)"></a>1.构建OAuth2Operations对象(获取token对象)</h2><p>创建QQOAuth2Template继承OAuth2Template<br>由于QQ返回响应不是标准json格式,需重写解析逻辑</p>
+<ol>
+<li>在构造函数中设置    setUseParametersForClientAuthentication(true) ps:默认为false,发起请求时没有携带clientID与clientSecret 属性.设置为true.</li>
+<li>重写createRestTemplate ,使template对象可以解析返回字符串.默认仅能解析json或form表单.</li>
+<li>重写 postForAccessGrant 方法,自定义解析响应逻辑(因为QQ授权返回的token是在url上的,需要自己解析,没有默认实现)</li>
+</ol>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line"><span class="keyword">public</span> class QQOAuth2Template extends OAuth2Template &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> QQOAuth2Template(<span class="keyword">String</span> clientId, <span class="keyword">String</span> clientSecret, <span class="keyword">String</span> authorizeUrl, <span class="keyword">String</span> accessTokenUrl) &#123;</span><br><span class="line">        <span class="keyword">super</span>(clientId, clientSecret, authorizeUrl, accessTokenUrl);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        设置为true.template发送请求时才会携带 clientId 与clientSecret..(重要)</span></span><br><span class="line">        setUseParametersForClientAuthentication(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="keyword">protected</span> RestTemplate createRestTemplate() &#123;</span><br><span class="line">        RestTemplate template = <span class="keyword">super</span>.createRestTemplate();</span><br><span class="line">    <span class="comment">//   social原本不会解析字符串,只会解析form或者json格式数据,添加此项      //可以解析返回字符串</span></span><br><span class="line">        template.getMessageConverters().<span class="built_in">add</span>(<span class="keyword">new</span> StringHttpMessageConverter(Charset.forName(<span class="string">"UTF-8"</span>)));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @author:xjc</span></span><br><span class="line"><span class="comment">     * @date:2018/12/1</span></span><br><span class="line"><span class="comment">     * @description: 由于QQ返回响应为string类型的参数字符串,不是json数据,social无法自己解析,需重写方法自定义解析</span></span><br><span class="line"><span class="comment">     * @params:</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    @Override</span><br><span class="line">    <span class="keyword">protected</span> AccessGrant postForAccessGrant(<span class="keyword">String</span> accessTokenUrl, MultiValueMap&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; parameters) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">String</span> responseStr=getRestTemplate().postForObject(accessTokenUrl,parameters,<span class="keyword">String</span>.class);</span><br><span class="line">        <span class="built_in">log</span>.info(<span class="string">"获取accessToken的响应:"</span>+responseStr);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">String</span>[] items=responseStr.<span class="built_in">split</span>(<span class="string">"&amp;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">String</span> accessToken = items[<span class="number">0</span>].substring(items[<span class="number">0</span>].indexOf(<span class="string">"="</span>)+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">log</span>.info(<span class="string">"accessToken:"</span>+accessToken);</span><br><span class="line">        Long expiresIn = <span class="keyword">new</span> Long(items[<span class="number">1</span>].substring(items[<span class="number">1</span>].indexOf(<span class="string">"="</span>)+<span class="number">1</span>));</span><br><span class="line">        <span class="built_in">log</span>.info(<span class="string">"expiresIn:"</span>+expiresIn);</span><br><span class="line">        <span class="keyword">String</span> refreshToken = items[<span class="number">2</span>].substring(items[<span class="number">2</span>].indexOf(<span class="string">"="</span>)+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">log</span>.info(<span class="string">"refreshToken:"</span>+refreshToken);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AccessGrant(accessToken,<span class="keyword">null</span>,refreshToken,expiresIn);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-构建API-用户封装token换取的第三方用户信息"><a href="#2-构建API-用户封装token换取的第三方用户信息" class="headerlink" title="2.构建API (用户封装token换取的第三方用户信息)"></a>2.构建API (用户封装token换取的第三方用户信息)</h2><p>创建QQApi 实现 继承AbstractOAuth2ApiBinding 类,重写getUserInfo方法<br>使用getRestTemplate可以向第三方应用发送请求并获取响应信息.<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">QQImpl</span> <span class="keyword">extends</span> <span class="title">AbstractOAuth2ApiBinding</span> <span class="keyword">implements</span> <span class="title">QQ</span> </span>&#123;</span><br><span class="line"><span class="comment">//    获取用户openId的url</span></span><br><span class="line">    private <span class="keyword">static</span>  <span class="keyword">final</span>  <span class="built_in">String</span> URL_GET_OPENID = <span class="string">"https://graph.qq.com/oauth2.0/me?access_token=%s"</span>;</span><br><span class="line"><span class="comment">//      获取用户信息的 url</span></span><br><span class="line">    private <span class="keyword">static</span>  <span class="keyword">final</span>  <span class="built_in">String</span> URL_GET_USER_INFO = <span class="string">"https://graph.qq.com/user/get_user_info?oauth_consumer_key=%s&amp;openid=%s"</span>;</span><br><span class="line"></span><br><span class="line">    private <span class="built_in">String</span> appId;</span><br><span class="line"></span><br><span class="line">    private <span class="built_in">String</span> openId;</span><br><span class="line"></span><br><span class="line">    private ObjectMapper objectMapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line">    public QQImpl(<span class="built_in">String</span> accessToken , <span class="built_in">String</span> appId)&#123;</span><br><span class="line">        <span class="keyword">super</span>(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.appId=appId;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">String</span> url = <span class="built_in">String</span>.format(URL_GET_OPENID,accessToken);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">String</span> openid_result=getRestTemplate().getForObject(url,<span class="built_in">String</span>.<span class="keyword">class</span>);</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">"openid_result::::::"</span>+openid_result);</span><br><span class="line">        <span class="built_in">String</span> openid=StringUtils.substringBetween(openid_result,<span class="string">"\"openid\":\""</span>,<span class="string">"\"&#125;"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.openId = openid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public QQUserInfo getQQUserInfo() &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">String</span> user_info_url = <span class="built_in">String</span>.format(URL_GET_USER_INFO,appId,openId);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">String</span> user_info_result=getRestTemplate().getForObject(user_info_url,<span class="built_in">String</span>.<span class="keyword">class</span>);</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">"user_info_result:::"</span>+user_info_result);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            QQUserInfo userInfo = objectMapper.readValue(user_info_result, QQUserInfo.<span class="keyword">class</span>);</span><br><span class="line">            userInfo.setOpenId(openId);</span><br><span class="line">            <span class="keyword">return</span> userInfo;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-通过template与api构建provider"><a href="#3-通过template与api构建provider" class="headerlink" title="3.通过template与api构建provider"></a>3.通过template与api构建provider</h2><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QQServiceProvider</span> <span class="keyword"><span class="keyword">extends</span> <span class="type">AbstractOAuth2ServiceProvider</span></span>&lt;<span class="title">QQ</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> appId;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final <span class="keyword">String</span> URL_AUTHOREIZE = <span class="string">"https://graph.qq.com/oauth2.0/authorize"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final <span class="keyword">String</span> URL_ACCESS_TOKEN = <span class="string">"https://graph.qq.com/oauth2.0/token"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> QQServiceProvider(<span class="keyword">String</span> appId,<span class="keyword">String</span> appSecret) &#123;</span><br><span class="line">        <span class="keyword">super</span>(<span class="keyword">new</span> <span class="type">QQOAuth2Template</span>(appId,appSecret,URL_AUTHOREIZE,URL_ACCESS_TOKEN));</span><br><span class="line">        <span class="built_in">this</span>.appId=appId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="keyword">public</span> QQ getApi(<span class="keyword">String</span> accessToken) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">QQImpl</span>(accessToken,appId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="构建连接工厂-ConnectionFactory"><a href="#构建连接工厂-ConnectionFactory" class="headerlink" title="构建连接工厂(ConnectionFactory)"></a>构建连接工厂(ConnectionFactory)</h1><h2 id="1-构建ApiAdaptor"><a href="#1-构建ApiAdaptor" class="headerlink" title="1.构建ApiAdaptor"></a>1.构建ApiAdaptor</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QQAdapter</span> <span class="keyword">implements</span> <span class="title">ApiAdapter</span>&lt;<span class="title">QQ</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    测试服务是否连接状态</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(QQ qq)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    常规数据项</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setConnectionValues</span><span class="params">(QQ qq, ConnectionValues connectionValues)</span> </span>&#123;</span><br><span class="line">        QQUserInfo userInfo = qq.getQQUserInfo();</span><br><span class="line"></span><br><span class="line">        connectionValues.setDisplayName(userInfo.getNickname());</span><br><span class="line">        connectionValues.setImageUrl(userInfo.getFigureurl_qq_1());</span><br><span class="line">        connectionValues.setProfileUrl(<span class="keyword">null</span>);  <span class="comment">//个人主页</span></span><br><span class="line">        connectionValues.setProviderUserId(userInfo.getOpenId());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获取用户信息 绑定解绑</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserProfile <span class="title">fetchUserProfile</span><span class="params">(QQ qq)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateStatus</span><span class="params">(QQ qq, String s)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        </span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-使用Adapter与serviceProvider构建connectionFactory"><a href="#2-使用Adapter与serviceProvider构建connectionFactory" class="headerlink" title="2.使用Adapter与serviceProvider构建connectionFactory"></a>2.使用Adapter与serviceProvider构建connectionFactory</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConditionalOnProperty</span>(prefix = <span class="string">"com.xjc.security.social.qq"</span>,name = <span class="string">"appId"</span>) <span class="comment">//只有配置了qq的AppID此配置才生效, QQ登录才生效</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">QQConnectionFactory</span> <span class="keyword">extends</span> <span class="title">OAuth2ConnectionFactory&lt;QQ&gt;</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    public <span class="type">QQConnectionFactory</span>(<span class="type">String</span> providerId, <span class="type">String</span> appId,<span class="type">String</span> appSecret) &#123;</span><br><span class="line">        <span class="keyword">super</span>(providerId, <span class="keyword">new</span> <span class="type">QQServiceProvider</span>(appId,appSecret), <span class="keyword">new</span> <span class="type">QQAdapter</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="配置Social"><a href="#配置Social" class="headerlink" title="配置Social"></a>配置Social</h1><h2 id="1-创建Social表对象"><a href="#1-创建Social表对象" class="headerlink" title="1.创建Social表对象"></a>1.创建Social表对象</h2><p>第三方应用于本地应用用户关系对应表<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `userconnection` (</span><br><span class="line">  `userId` varchar(255) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  `providerId` varchar(255) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  `providerUserId` varchar(255) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  `rank` int(11) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  `displayName` varchar(255)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `profileUrl` varchar(512)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `imageUrl` varchar(512)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `accessToken` varchar(512) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  `secret` varchar(512)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `refreshToken` varchar(512)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `expireTime` bigint(20)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY KEY (`userId`,`providerId`,`providerUserId`),</span><br><span class="line">  UNIQUE KEY `UserConnectionRank` (`userId`,`providerId`,`rank`)</span><br><span class="line">) <span class="attribute">ENGINE</span>=InnoDB<span class="built_in"> DEFAULT </span><span class="attribute">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-SocialConfigure-继承SocialConfigurerAdapter-lt-适配器-gt"><a href="#2-SocialConfigure-继承SocialConfigurerAdapter-lt-适配器-gt" class="headerlink" title="2.SocialConfigure (继承SocialConfigurerAdapter&lt;适配器&gt;)"></a>2.SocialConfigure (继承SocialConfigurerAdapter&lt;适配器&gt;)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: xjc</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2018/11/29 11:35</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span> QQ登录适配器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *      配置此适配器后,第三方登录生效,拦截url请求为 /oauth/&lt;providerId&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty</span>(prefix = <span class="string">"com.xjc.security.social.qq"</span>,name = <span class="string">"appId"</span>) <span class="comment">//只有配置了qq的AppID此配置才生效, QQ登录才生效</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QQAutoConfigurerAdapter</span> <span class="keyword">extends</span> <span class="title">SocialConfigurerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> SsoSecurityProperties ssoSecurityProperties;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DataSource dataSource;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span>:xjc</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>:2018/12/2</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: spring-oauth2.0包之后必须重写该方法 返回主项目中对应userId,</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserIdSource <span class="title">getUserIdSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addConnectionFactories</span><span class="params">(ConnectionFactoryConfigurer configurer,</span></span></span><br><span class="line"><span class="function"><span class="params">                                       Environment environment)</span> </span>&#123;</span><br><span class="line">        configurer.addConnectionFactory(createConnectionFactory());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> ConnectionFactory&lt;?&gt; createConnectionFactory() &#123;</span><br><span class="line">        QQProperties qqProperties=ssoSecurityProperties.getSocial().getQq();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> QQConnectionFactory(qqProperties.getProviderId(), qqProperties.getAppId(), qqProperties.getAppSecret());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span>:xjc</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>:2018/12/1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>:  这里注意:必须复写 getUsersConnectionRepository方法,jdbcRepository才生效</span></span><br><span class="line"><span class="comment">     *            可能我没有设置配置文件优先级</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@params</span>:</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span>                                                               <span class="comment">//SpringSocial 包含</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UsersConnectionRepository <span class="title">getUsersConnectionRepository</span><span class="params">(ConnectionFactoryLocator connectionFactoryLocator)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        JdbcUsersConnectionRepository repository = <span class="keyword">new</span> JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());</span><br><span class="line">  操作</span><br><span class="line">        <span class="comment">//repository.setTablePrefix();   //设置表前缀(可选)</span></span><br><span class="line">       <span class="comment">// repository.setConnectionSignUp(); // 注册操作</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">/*repository.setConnectionSignUp(new ConnectionSignUp() &#123;</span></span><br><span class="line"><span class="comment">           @Override</span></span><br><span class="line"><span class="comment">           public String execute(Connection&lt;?&gt; connection) &#123;</span></span><br><span class="line"><span class="comment">               return getUserIdSource().getUserId();</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;);*/</span></span><br><span class="line">        <span class="keyword">return</span>  repository;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-在security配置启动中加入Social拦截器配置"><a href="#3-在security配置启动中加入Social拦截器配置" class="headerlink" title="3.在security配置启动中加入Social拦截器配置"></a>3.在security配置启动中加入Social拦截器配置</h2><p><img src="https://user-images.githubusercontent.com/34369858/50052504-fe364080-015f-11e9-81cf-e5e54d2a8bbf.png" alt="image"></p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ol>
+<li><p>QQ显示错误的回调<br><img src="https://user-images.githubusercontent.com/34369858/50052513-363d8380-0160-11e9-8a5a-e5ce422a5ff7.png" alt="image"><br>原因,回调地址为localhost:8080…..   与互联上配置的不一致.<br>解决: 修改本地host文件,映射localhost与QQ互联上的回调域名一致</p>
+</li>
+<li><p>登录成功跳转/sinIn  路径<br>原因:登录成功 spring-social会使用jdbcRepository(自己配置的)查询数据库中是否有对应的openId(在数据库中为providerUserId ),若没有.会默认跳往/sinIn 进行注册<br>解决:在SocialConifg配置中自定义注册页面<br><img src="https://user-images.githubusercontent.com/34369858/50052533-8e748580-0160-11e9-8638-b6d89864acd9.png" alt="image"></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/socail/" rel="tag"># socail</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/21/webupload-springboot实现文件上传/" rel="next" title="webupload+springboot实现文件上传">
+                <i class="fa fa-chevron-left"></i> webupload+springboot实现文件上传
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/16/基于OAuth2开发Client模块/" rel="prev" title="基于OAuth2开发Client模块">
+                基于OAuth2开发Client模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="xjc" />
+            
+              <p class="site-author-name" itemprop="name">xjc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Xenos3811" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主要依赖"><span class="nav-number">1.</span> <span class="nav-text">主要依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建ServiceProvider-服务器提供商"><span class="nav-number">2.</span> <span class="nav-text">构建ServiceProvider(服务器提供商)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-构建OAuth2Operations对象-获取token对象"><span class="nav-number">2.1.</span> <span class="nav-text">1.构建OAuth2Operations对象(获取token对象)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-构建API-用户封装token换取的第三方用户信息"><span class="nav-number">2.2.</span> <span class="nav-text">2.构建API (用户封装token换取的第三方用户信息)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-通过template与api构建provider"><span class="nav-number">2.3.</span> <span class="nav-text">3.通过template与api构建provider</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建连接工厂-ConnectionFactory"><span class="nav-number">3.</span> <span class="nav-text">构建连接工厂(ConnectionFactory)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-构建ApiAdaptor"><span class="nav-number">3.1.</span> <span class="nav-text">1.构建ApiAdaptor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-使用Adapter与serviceProvider构建connectionFactory"><span class="nav-number">3.2.</span> <span class="nav-text">2.使用Adapter与serviceProvider构建connectionFactory</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置Social"><span class="nav-number">4.</span> <span class="nav-text">配置Social</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建Social表对象"><span class="nav-number">4.1.</span> <span class="nav-text">1.创建Social表对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-SocialConfigure-继承SocialConfigurerAdapter-lt-适配器-gt"><span class="nav-number">4.2.</span> <span class="nav-text">2.SocialConfigure (继承SocialConfigurerAdapter&lt;适配器&gt;)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-在security配置启动中加入Social拦截器配置"><span class="nav-number">4.3.</span> <span class="nav-text">3.在security配置启动中加入Social拦截器配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">5.</span> <span class="nav-text">问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xjc</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">18.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '1uPnuwe5nXwad9ta91b3KD3A-gzGzoHsz',
+        appKey: '78D9iI1Sb9KflApzp2uEI3WJ',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("1uPnuwe5nXwad9ta91b3KD3A-gzGzoHsz", "78D9iI1Sb9KflApzp2uEI3WJ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
